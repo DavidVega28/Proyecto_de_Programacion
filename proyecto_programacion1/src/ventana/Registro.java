@@ -5,8 +5,17 @@ import AppPackage.AnimationClass;
 import clases.enviar_Correo;
 import clases.enviar_correocontra;
 import java.awt.Desktop;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -14,10 +23,75 @@ import javax.swing.JOptionPane;
 
 public class Registro extends javax.swing.JFrame {
 
-    public Registro() {
+    File archivoregistro = new File("Registro.txt");
+    String opcion = "Nuevo";
+
+    public Registro() throws IOException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.lb_ocultar.setVisible(false);
+        verificarArchivo();
+    }
+
+    private void verificarArchivo() throws IOException {
+
+        if (!archivoregistro.exists()) {
+
+            archivoregistro.createNewFile();
+            System.out.println("Archivo creado.");
+        } else {
+
+            System.out.println("Archivo existente.");
+            verificarInformacion();
+        }
+    }
+
+    private void verificarInformacion() throws FileNotFoundException, IOException {
+
+        String linea = null;
+        int numeroRegistros = 0;
+
+        BufferedReader leer = new BufferedReader(new FileReader(archivoregistro));
+
+        while ((linea = leer.readLine()) != null) {
+            numeroRegistros += 1;
+        }
+        leer.close();
+
+        if (numeroRegistros == 0) {
+
+            JOptionPane.showMessageDialog(rootPane, "El archivo se encuentra vacío.");
+        } else {
+            String[][] datos = new String[numeroRegistros][7];
+            int posicion = 0;
+            String linealeida = null;
+
+            BufferedReader leerArchivo = new BufferedReader(new FileReader(archivoregistro));
+
+            while ((linealeida = leerArchivo.readLine()) != null) {
+
+                StringTokenizer st = new StringTokenizer(linealeida, "\t");
+
+                datos[posicion][0] = st.nextToken().trim();
+                datos[posicion][1] = st.nextToken().trim();
+                datos[posicion][2] = st.nextToken().trim();
+                datos[posicion][3] = st.nextToken().trim();
+                datos[posicion][4] = st.nextToken().trim();
+                datos[posicion][5] = st.nextToken().trim();
+                datos[posicion][6] = st.nextToken().trim();
+
+                posicion += 1;
+            }
+            leerArchivo.close();
+        }
+    }
+    
+    private void guardarregistro() throws FileNotFoundException, UnsupportedEncodingException, IOException{
+    
+        BufferedWriter escribirArchivo = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivoregistro,true),"utf-8"));
+        escribirArchivo.write(txt_nombre.getText()+"\t"+txt_apelli.getText()+"\t"+txt_numcedula.getText()+"\t"+txt_email.getText()+"\t"+txt_usuario.getText()+"\t"+txt_contra.getText()+"\t"+txt_celular.getText()+"\n");
+        escribirArchivo.close();
+        verificarInformacion();
     }
 
     @SuppressWarnings("unchecked")
@@ -233,7 +307,12 @@ public class Registro extends javax.swing.JFrame {
         txt_login.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txt_login.setForeground(new java.awt.Color(153, 153, 153));
         txt_login.setBorder(null);
-        JPIngreso.add(txt_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 140, 30));
+        txt_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_loginActionPerformed(evt);
+            }
+        });
+        JPIngreso.add(txt_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 140, 30));
         JPIngreso.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 230, 10));
         JPIngreso.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 230, 10));
 
@@ -246,7 +325,7 @@ public class Registro extends javax.swing.JFrame {
                 txt_passActionPerformed(evt);
             }
         });
-        JPIngreso.add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 150, 30));
+        JPIngreso.add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 150, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_customer_32px_1.png"))); // NOI18N
         JPIngreso.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
@@ -367,12 +446,12 @@ public class Registro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-        private void OpenInternet() {
-            try {
-                Desktop.getDesktop().browse(URI.create("www.google.com"));
-            } catch (Exception e) {
-            }
+    private void OpenInternet() {
+        try {
+            Desktop.getDesktop().browse(URI.create("www.google.com"));
+        } catch (Exception e) {
         }
+    }
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
         this.setState(ventanaLogin.ICONIFIED);
@@ -387,7 +466,7 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel21MouseClicked
 
     private void btn_RegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegistrarseActionPerformed
-        
+
         try {
             String rol = "";
             if (RBadmin_registro.isSelected()) {
@@ -408,7 +487,7 @@ public class Registro extends javax.swing.JFrame {
             txt_contra.setText("");
             txt_celular.setText("");
             txt_email.setText("");
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Error en el proceso de registro.");
         }
@@ -443,6 +522,13 @@ public class Registro extends javax.swing.JFrame {
 
     private void btn_RegistrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RegistrarseMouseClicked
 
+        try {
+            guardarregistro();
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_RegistrarseMouseClicked
 
     private void txt_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_emailActionPerformed
@@ -470,16 +556,16 @@ public class Registro extends javax.swing.JFrame {
                 break;
             } else {
                 e = false;
-            }    
-        }        
-            if (e) {
-                JOptionPane.showMessageDialog(rootPane, "Usuario y contraseña correctos");
-                Bienvenida p = new Bienvenida();
-                p.setVisible(true);
-            } else {
-                   JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrectos");
             }
-        
+        }
+        if (e) {
+            JOptionPane.showMessageDialog(rootPane, "Usuario y contraseña correctos");
+            Bienvenida p = new Bienvenida();
+            p.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrectos");
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
@@ -489,7 +575,7 @@ public class Registro extends javax.swing.JFrame {
     private void lb_verMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_verMouseClicked
         lb_ver.setVisible(false);
         lb_ocultar.setVisible(true);
-        txt_pass.setEchoChar((char)0);
+        txt_pass.setEchoChar((char) 0);
     }//GEN-LAST:event_lb_verMouseClicked
 
     private void lb_ocultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ocultarMouseClicked
@@ -499,9 +585,13 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_ocultarMouseClicked
 
     private void lb_olvidocontraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_olvidocontraseñaMouseClicked
-    recuperar_contra m = new recuperar_contra();
-    m.setVisible(true);
+        recuperar_contra m = new recuperar_contra();
+        m.setVisible(true);
     }//GEN-LAST:event_lb_olvidocontraseñaMouseClicked
+
+    private void txt_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_loginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_loginActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -551,4 +641,4 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 
-    }
+}

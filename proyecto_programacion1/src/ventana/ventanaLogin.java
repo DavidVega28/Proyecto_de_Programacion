@@ -4,6 +4,7 @@ package ventana;
 import AppPackage.AnimationClass;
 import clases.enviar_correocontra;
 import java.awt.Desktop;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -433,9 +434,14 @@ public class ventanaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_calendarioMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       Registro acceso = new Registro();
-       acceso.setVisible(true);
+       Registro acceso;
+        try {
+            acceso = new Registro();
+            acceso.setVisible(true);
        this.setVisible(false);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(ventanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaActionPerformed
