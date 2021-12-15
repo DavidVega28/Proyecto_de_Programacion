@@ -5,24 +5,38 @@ import clases.Usuario;
 import clases.arraylist_carreras;
 import clases.carreras;
 import clases.enviar_correocontra;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.StringTokenizer;
 import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Añadir_carreras extends javax.swing.JFrame {
     
+    File archivocarreras = new File("Carreras.txt");
+    String opcion = "Nuevo";
+    
     DefaultTableModel t = new DefaultTableModel();
 
-    public Añadir_carreras() {
+    public Añadir_carreras() throws IOException {
         initComponents();
         this.setLocationRelativeTo(null);
         tabla.setModel(t);
         t.addColumn("Nombre de la carrera");
         t.addColumn("Código");
         t.addColumn("Cupos");
+        
+        verificarArchivo();
     }
 
     public void cargar() {
@@ -35,7 +49,60 @@ public class Añadir_carreras extends javax.swing.JFrame {
         }
          
     }
+    private void verificarArchivo() throws IOException {
 
+        if (!archivocarreras.exists()) {
+
+            archivocarreras.createNewFile();
+            System.out.println("Archivo creado.");
+        } else {
+
+            System.out.println("Archivo existente.");
+            verificarInformacion();
+        }
+    }
+
+    private void verificarInformacion() throws FileNotFoundException, IOException {
+
+        String linea = null;
+        int numeroRegistros = 0;
+
+        BufferedReader leer = new BufferedReader(new FileReader(archivocarreras));
+
+        while ((linea = leer.readLine()) != null) {
+            numeroRegistros += 1;
+        }
+        leer.close();
+
+        if (numeroRegistros == 0) {
+
+            JOptionPane.showMessageDialog(rootPane, "El archivo se encuentra vacío.");
+        } else {
+            String[][] datos = new String[numeroRegistros][3];
+            int posicion = 0;
+            String linealeida = null;
+
+            BufferedReader leerArchivo = new BufferedReader(new FileReader(archivocarreras));
+
+            while ((linealeida = leerArchivo.readLine()) != null) {
+
+                StringTokenizer st = new StringTokenizer(linealeida, ",");
+
+                datos[posicion][0] = st.nextToken().trim();
+                datos[posicion][1] = st.nextToken().trim();
+                datos[posicion][2] = st.nextToken().trim();
+
+            }
+            leerArchivo.close();
+        }
+    }
+    private void guardarregistro() throws FileNotFoundException, UnsupportedEncodingException, IOException{
+    
+        BufferedWriter escribirArchivo = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivocarreras,true),"utf-8"));
+        escribirArchivo.write(txt_nombrecarrera.getText()+","+txt_codigo.getText()+","+txt_cupos.getText()+"\n");
+        verificarInformacion();
+        escribirArchivo.close();
+    }
 
     @SuppressWarnings("unchecked") 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -195,7 +262,12 @@ public class Añadir_carreras extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
-        Bienvenida l = new Bienvenida();
+        Bienvenida l = null;
+        try {
+            l = new Bienvenida();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Añadir_carreras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         l.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_volverActionPerformed
@@ -221,12 +293,18 @@ public class Añadir_carreras extends javax.swing.JFrame {
         m.setCupos(cupos);
 
         arraylist_carreras.Arraycarrera.add(m);
+        cargar();
+        try {
+            guardarregistro();
+        } catch (UnsupportedEncodingException ex) {
+            java.util.logging.Logger.getLogger(Registro_final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Registro_final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
 
         txt_nombrecarrera.setText("");
         txt_codigo.setText("");
         txt_cupos.setText("");
-
-        cargar();
     }//GEN-LAST:event_btn_añadircarrera2ActionPerformed
 
     private void btn_modificarcarrera2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarcarrera2ActionPerformed
@@ -272,7 +350,11 @@ public class Añadir_carreras extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Añadir_carreras().setVisible(true);
+                try {
+                    new Añadir_carreras().setVisible(true);
+                } catch (IOException ex) {
+                    java.util.logging.Logger.getLogger(Añadir_carreras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
             }
         });
     }

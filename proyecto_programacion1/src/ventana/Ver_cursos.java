@@ -5,6 +5,11 @@
  */
 package ventana;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
@@ -16,6 +21,7 @@ public class Ver_cursos extends javax.swing.JFrame {
      */
     public Ver_cursos() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -36,7 +42,6 @@ public class Ver_cursos extends javax.swing.JFrame {
         jlblInternet1 = new javax.swing.JLabel();
         Jlabel_calculadora1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         lb_codigo1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         lb_apelli1 = new javax.swing.JLabel();
@@ -45,11 +50,18 @@ public class Ver_cursos extends javax.swing.JFrame {
         label_estudiante1 = new javax.swing.JLabel();
         lb_email1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         label_nombre1 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        lb_selecionar = new javax.swing.JLabel();
+        label_vercursos = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -115,11 +127,6 @@ public class Ver_cursos extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_User_96px_2.png"))); // NOI18N
         JPIngreso1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 140, 80));
 
-        jLabel2.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Información Personal");
-        JPIngreso1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 170, 30));
-
         lb_codigo1.setForeground(new java.awt.Color(153, 153, 153));
         JPIngreso1.add(lb_codigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 170, 20));
 
@@ -152,11 +159,6 @@ public class Ver_cursos extends javax.swing.JFrame {
         jLabel13.setText("E-mail:");
         JPIngreso1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel11.setText("Nombre:");
-        JPIngreso1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
-
         label_nombre1.setForeground(new java.awt.Color(153, 153, 153));
         label_nombre1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -165,7 +167,17 @@ public class Ver_cursos extends javax.swing.JFrame {
         });
         JPIngreso1.add(label_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 170, 20));
 
-        jPanel5.add(JPIngreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 590));
+        jLabel12.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel12.setText("Nombre:");
+        JPIngreso1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setText("Información Personal");
+        JPIngreso1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 170, 30));
+
+        jPanel5.add(JPIngreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 600));
 
         jButton1.setBackground(new java.awt.Color(44, 47, 112));
         jButton1.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
@@ -176,26 +188,54 @@ public class Ver_cursos extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 100, -1));
+        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 50, 100, -1));
+
+        lb_selecionar.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        lb_selecionar.setForeground(new java.awt.Color(51, 51, 51));
+        lb_selecionar.setText("Seleccione la carrera:");
+        jPanel5.add(lb_selecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 160, -1));
+
+        label_vercursos.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        label_vercursos.setForeground(new java.awt.Color(51, 51, 51));
+        label_vercursos.setText("Ver Cursos");
+        jPanel5.add(label_vercursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, 110, 30));
+
+        jComboBox1.setBackground(new java.awt.Color(153, 153, 153));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(44, 47, 112)));
+        jPanel5.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 280, 30));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nombre del Curso", "Código", "Créditos"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, 720, 350));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
+            .addGap(0, 1062, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 1062, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 598, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -203,11 +243,16 @@ public class Ver_cursos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
-        // TODO add your handling code here:
+        this.setState(Ver_cursos.ICONIFIED);
     }//GEN-LAST:event_jLabel23MouseClicked
 
     private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
-        // TODO add your handling code here:
+        int dialog = JOptionPane.YES_NO_OPTION;
+        int result = JOptionPane.showConfirmDialog(null,"Desea salir de la aplicación?","Salir", dialog);
+        if (result == 0)
+        {
+            System.exit(0);
+        }
     }//GEN-LAST:event_jLabel24MouseClicked
 
     private void Herramientas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Herramientas1MouseClicked
@@ -227,7 +272,12 @@ public class Ver_cursos extends javax.swing.JFrame {
     }//GEN-LAST:event_label_nombre1KeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Bienvenida m = new Bienvenida();
+        Bienvenida m = null;
+        try {
+            m = new Bienvenida();
+        } catch (IOException ex) {
+            Logger.getLogger(Ver_cursos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -276,22 +326,27 @@ public class Ver_cursos extends javax.swing.JFrame {
     private javax.swing.JPanel JPIngreso1;
     private javax.swing.JLabel Jlabel_calculadora1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jlblInternet1;
     private javax.swing.JLabel label_estudiante1;
     private javax.swing.JLabel label_nombre1;
+    private javax.swing.JLabel label_vercursos;
     private javax.swing.JLabel lb_apelli1;
     private javax.swing.JLabel lb_apellidos1;
     private javax.swing.JLabel lb_cedula1;
     private javax.swing.JLabel lb_codigo1;
     private javax.swing.JLabel lb_email1;
+    private javax.swing.JLabel lb_selecionar;
     // End of variables declaration//GEN-END:variables
 }

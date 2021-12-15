@@ -1,0 +1,3 @@
+Administración,AD123,2
+Ingenieria en sistemas,IN345,3
+Farmacia,FA123,2

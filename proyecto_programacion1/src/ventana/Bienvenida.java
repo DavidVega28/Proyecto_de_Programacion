@@ -1,30 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ventana;
 
 import clases.Reportes;
 import AppPackage.AnimationClass;
 import clases.reporte_Estudiantes;
 import java.awt.Desktop;
+import java.io.IOException;
 import java.net.URI;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static ventana.componentes.usuarios;
 
-/**
- *
- * @author Luis Miguel
- */
+
 public class Bienvenida extends javax.swing.JFrame {
     
 
-    public Bienvenida() {
+    public Bienvenida() throws IOException {
         initComponents();
         this.setLocationRelativeTo(null);
-        //modelatabla = (DefaultTableModel) tblDatos.getModel();
+        Registro_final m = new Registro_final();
+        label_nombre.setText(m.texto_nombre);
+        lb_apelli.setText(m.texto_apellidos);
+        lb_cedula.setText(m.texto_numcedula);
+        lb_email.setText(m.texto_email);
+        
         if(componentes.rol == "Administrador"){
             label_estudiante.setVisible(false);
             lb_codigo.setVisible(false);
@@ -66,7 +68,6 @@ public class Bienvenida extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         label_nombre = new javax.swing.JLabel();
-        bt_estudiantes = new javax.swing.JButton();
         login = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -90,7 +91,6 @@ public class Bienvenida extends javax.swing.JFrame {
         label_nombre1 = new javax.swing.JLabel();
         BtnEditar1 = new javax.swing.JButton();
         bt_carreras = new javax.swing.JButton();
-        bt_estudiantes1 = new javax.swing.JButton();
         login1 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -98,6 +98,9 @@ public class Bienvenida extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        bt_estudiantes = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        lb_cursosmtriculados = new javax.swing.JLabel();
 
         jPanel3.setBackground(new java.awt.Color(255, 242, 134));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -194,7 +197,7 @@ public class Bienvenida extends javax.swing.JFrame {
         JPIngreso.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 170, 30));
 
         lb_codigo.setForeground(new java.awt.Color(153, 153, 153));
-        JPIngreso.add(lb_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 170, 20));
+        JPIngreso.add(lb_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 250, 20));
 
         jLabel3.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
@@ -218,7 +221,7 @@ public class Bienvenida extends javax.swing.JFrame {
         JPIngreso.add(label_estudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, -1));
 
         lb_email.setForeground(new java.awt.Color(153, 153, 153));
-        JPIngreso.add(lb_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 170, 20));
+        JPIngreso.add(lb_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 250, 20));
 
         jLabel12.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(51, 51, 51));
@@ -239,18 +242,6 @@ public class Bienvenida extends javax.swing.JFrame {
         JPIngreso.add(label_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 170, 20));
 
         jPanel2.add(JPIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 590));
-
-        bt_estudiantes.setBackground(new java.awt.Color(44, 47, 112));
-        bt_estudiantes.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        bt_estudiantes.setForeground(new java.awt.Color(255, 255, 255));
-        bt_estudiantes.setText("Estudiantes ");
-        bt_estudiantes.setBorder(null);
-        bt_estudiantes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_estudiantesActionPerformed(evt);
-            }
-        });
-        jPanel2.add(bt_estudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 540, 130, 30));
 
         login.setBackground(new java.awt.Color(44, 47, 112));
         login.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
@@ -397,19 +388,7 @@ public class Bienvenida extends javax.swing.JFrame {
                 bt_carrerasActionPerformed(evt);
             }
         });
-        jPanel5.add(bt_carreras, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 540, 130, 30));
-
-        bt_estudiantes1.setBackground(new java.awt.Color(44, 47, 112));
-        bt_estudiantes1.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        bt_estudiantes1.setForeground(new java.awt.Color(255, 255, 255));
-        bt_estudiantes1.setText("Estudiantes ");
-        bt_estudiantes1.setBorder(null);
-        bt_estudiantes1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_estudiantes1ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(bt_estudiantes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 540, 130, 30));
+        jPanel5.add(bt_carreras, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 540, 130, 30));
 
         login1.setBackground(new java.awt.Color(44, 47, 112));
         login1.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
@@ -429,24 +408,39 @@ public class Bienvenida extends javax.swing.JFrame {
                 jLabel14MouseClicked(evt);
             }
         });
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, -1));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Ver cursos");
-        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, -1));
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
+            }
+        });
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 420, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Editar informacion personal");
-        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 200, -1, -1));
+        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel16MouseClicked(evt);
+            }
+        });
+        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, -1, -1));
 
         jLabel5.setBackground(new java.awt.Color(238, 112, 87));
         jLabel5.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Automatrícula");
-        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 110, 30));
+        jLabel5.setText("Cursos Matriculados");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 230, 160, 30));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Logos Universidad LD/Ver cursos.png"))); // NOI18N
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -454,7 +448,7 @@ public class Bienvenida extends javax.swing.JFrame {
                 jLabel9MouseClicked(evt);
             }
         });
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, -1, -1));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Logos Universidad LD/Editar info.png"))); // NOI18N
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -462,7 +456,32 @@ public class Bienvenida extends javax.swing.JFrame {
                 jLabel17MouseClicked(evt);
             }
         });
-        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 90, -1, -1));
+        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, -1, -1));
+
+        bt_estudiantes.setBackground(new java.awt.Color(44, 47, 112));
+        bt_estudiantes.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
+        bt_estudiantes.setForeground(new java.awt.Color(255, 255, 255));
+        bt_estudiantes.setText("Personas Registradas");
+        bt_estudiantes.setBorder(null);
+        bt_estudiantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_estudiantesActionPerformed(evt);
+            }
+        });
+        jPanel5.add(bt_estudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 540, 160, 30));
+
+        jLabel18.setBackground(new java.awt.Color(238, 112, 87));
+        jLabel18.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("Automatrícula");
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
+        jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 110, 30));
+        jPanel5.add(lb_cursosmtriculados, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 150, 110));
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -481,7 +500,7 @@ public class Bienvenida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        this.setState(ventanaLogin.ICONIFIED);
+        this.setState(Registro_final.ICONIFIED);
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
@@ -501,7 +520,7 @@ public class Bienvenida extends javax.swing.JFrame {
 
     }
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
-        this.setState(ventanaLogin.ICONIFIED);
+        this.setState(Registro_final.ICONIFIED);
     }//GEN-LAST:event_jLabel22MouseClicked
 
     private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
@@ -543,13 +562,23 @@ public class Bienvenida extends javax.swing.JFrame {
     }//GEN-LAST:event_label_nombreKeyReleased
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
-        ventanaLogin m = new ventanaLogin();
+        Registro_final m = null;
+        try {
+            m = new Registro_final();
+        } catch (IOException ex) {
+            Logger.getLogger(Bienvenida.class.getName()).log(Level.SEVERE, null, ex);
+        }
         m.setVisible(true);
         m.dispose();
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        ventanaLogin m = new ventanaLogin();
+        Registro_final m = null;
+        try {
+            m = new Registro_final();
+        } catch (IOException ex) {
+            Logger.getLogger(Bienvenida.class.getName()).log(Level.SEVERE, null, ex);
+        }
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_loginActionPerformed
@@ -592,17 +621,18 @@ public class Bienvenida extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel14MouseClicked
 
-    private void bt_estudiantes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_estudiantes1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bt_estudiantes1ActionPerformed
-
     private void bt_estudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_estudiantesActionPerformed
         reporte_Estudiantes m = new reporte_Estudiantes(new Date().toString(),"C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_progragit\\Proyecto_progra\\proyecto_progra2.0\\src\\Image\\UNIVERSIDAD.jpeg",usuarios);
         m.CrearReporte_estu();
     }//GEN-LAST:event_bt_estudiantesActionPerformed
 
     private void bt_carrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_carrerasActionPerformed
-        Añadir_carreras m = new Añadir_carreras();
+        Añadir_carreras m = null;
+        try {
+            m = new Añadir_carreras();
+        } catch (IOException ex) {
+            Logger.getLogger(Bienvenida.class.getName()).log(Level.SEVERE, null, ex);
+        }
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_bt_carrerasActionPerformed
@@ -619,6 +649,30 @@ public class Bienvenida extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel17MouseClicked
 
+    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+     Ventana_matricula m = new Ventana_matricula();
+        m.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel18MouseClicked
+
+    private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
+        Editar_info m = new Editar_info();
+        m.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel16MouseClicked
+
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        Ver_cursos m = new Ver_cursos();
+        m.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        ventana_vercursosmatriculados m = new ventana_vercursosmatriculados();
+        m.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel5MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -626,7 +680,11 @@ public class Bienvenida extends javax.swing.JFrame {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Bienvenida().setVisible(true);
+                try {
+                    new Bienvenida().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Bienvenida.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -641,7 +699,6 @@ public class Bienvenida extends javax.swing.JFrame {
     private javax.swing.JLabel Jlabel_calculadora1;
     private javax.swing.JButton bt_carreras;
     private javax.swing.JButton bt_estudiantes;
-    private javax.swing.JButton bt_estudiantes1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -651,6 +708,7 @@ public class Bienvenida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -683,6 +741,7 @@ public class Bienvenida extends javax.swing.JFrame {
     private javax.swing.JLabel lb_cedula1;
     private javax.swing.JLabel lb_codigo;
     private javax.swing.JLabel lb_codigo1;
+    private javax.swing.JLabel lb_cursosmtriculados;
     private javax.swing.JLabel lb_email;
     private javax.swing.JLabel lb_email1;
     private javax.swing.JButton login;

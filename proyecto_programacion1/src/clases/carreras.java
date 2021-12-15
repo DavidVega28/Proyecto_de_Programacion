@@ -30,4 +30,5 @@ public class carreras {
     public void setCupos(String Cupos) {
         this.Cupos = Cupos;
     }
+
 }

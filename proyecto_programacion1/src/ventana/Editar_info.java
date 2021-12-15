@@ -5,6 +5,11 @@
  */
 package ventana;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
@@ -16,6 +21,7 @@ public class Editar_info extends javax.swing.JFrame {
      */
     public Editar_info() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -36,21 +42,31 @@ public class Editar_info extends javax.swing.JFrame {
         jlblInternet1 = new javax.swing.JLabel();
         Jlabel_calculadora1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        lb_codigo1 = new javax.swing.JLabel();
+        lb_codigo = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        lb_apelli1 = new javax.swing.JLabel();
+        lb_apelli = new javax.swing.JLabel();
         lb_apellidos1 = new javax.swing.JLabel();
-        lb_cedula1 = new javax.swing.JLabel();
+        lb_cedula = new javax.swing.JLabel();
         label_estudiante1 = new javax.swing.JLabel();
-        lb_email1 = new javax.swing.JLabel();
+        lb_email = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        label_nombre1 = new javax.swing.JLabel();
-        BtnEditar1 = new javax.swing.JButton();
+        label_nombre = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        txt_email_cambiar = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txt_nombre_cambiar = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txt_apellido_cambiar = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txt_cedula_cambiar = new javax.swing.JTextField();
+        BtnEditar1 = new javax.swing.JButton();
+        lb_infopersonal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,62 +132,55 @@ public class Editar_info extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_User_96px_2.png"))); // NOI18N
         JPIngreso1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 140, 80));
 
-        jLabel2.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Información Personal");
-        JPIngreso1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 170, 30));
-
-        lb_codigo1.setForeground(new java.awt.Color(153, 153, 153));
-        JPIngreso1.add(lb_codigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 170, 20));
+        lb_codigo.setForeground(new java.awt.Color(153, 153, 153));
+        JPIngreso1.add(lb_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 170, 20));
 
         jLabel8.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setText("Número Cédula:");
         JPIngreso1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
 
-        lb_apelli1.setForeground(new java.awt.Color(153, 153, 153));
-        JPIngreso1.add(lb_apelli1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 170, 20));
+        lb_apelli.setForeground(new java.awt.Color(153, 153, 153));
+        JPIngreso1.add(lb_apelli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 170, 20));
 
         lb_apellidos1.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         lb_apellidos1.setForeground(new java.awt.Color(51, 51, 51));
         lb_apellidos1.setText("Apellidos:");
         JPIngreso1.add(lb_apellidos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
 
-        lb_cedula1.setForeground(new java.awt.Color(153, 153, 153));
-        JPIngreso1.add(lb_cedula1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 170, 20));
+        lb_cedula.setForeground(new java.awt.Color(153, 153, 153));
+        JPIngreso1.add(lb_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 170, 20));
 
         label_estudiante1.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         label_estudiante1.setForeground(new java.awt.Color(51, 51, 51));
         label_estudiante1.setText("Código Estudiantil:");
         JPIngreso1.add(label_estudiante1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, -1));
 
-        lb_email1.setForeground(new java.awt.Color(153, 153, 153));
-        JPIngreso1.add(lb_email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 170, 20));
+        lb_email.setForeground(new java.awt.Color(153, 153, 153));
+        JPIngreso1.add(lb_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 170, 20));
 
         jLabel13.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(51, 51, 51));
         jLabel13.setText("E-mail:");
         JPIngreso1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel11.setText("Nombre:");
-        JPIngreso1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
-
-        label_nombre1.setForeground(new java.awt.Color(153, 153, 153));
-        label_nombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+        label_nombre.setForeground(new java.awt.Color(153, 153, 153));
+        label_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                label_nombre1KeyReleased(evt);
+                label_nombreKeyReleased(evt);
             }
         });
-        JPIngreso1.add(label_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 170, 20));
+        JPIngreso1.add(label_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 170, 20));
 
-        BtnEditar1.setBackground(new java.awt.Color(44, 47, 112));
-        BtnEditar1.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        BtnEditar1.setForeground(new java.awt.Color(255, 255, 255));
-        BtnEditar1.setText("Editar");
-        BtnEditar1.setBorder(null);
-        JPIngreso1.add(BtnEditar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 538, 100, 30));
+        jLabel12.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel12.setText("Nombre:");
+        JPIngreso1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setText("Información Personal");
+        JPIngreso1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 170, 30));
 
         jPanel5.add(JPIngreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 590));
 
@@ -184,7 +193,75 @@ public class Editar_info extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 100, -1));
+        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 50, 100, -1));
+
+        jLabel11.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel11.setText("E-mail:");
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, 50, 30));
+
+        txt_email_cambiar.setBackground(new java.awt.Color(153, 153, 153));
+        txt_email_cambiar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(44, 47, 112)));
+        txt_email_cambiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_email_cambiarActionPerformed(evt);
+            }
+        });
+        jPanel5.add(txt_email_cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 310, 40));
+
+        jLabel14.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel14.setText("Nombre:");
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 70, 30));
+
+        txt_nombre_cambiar.setBackground(new java.awt.Color(153, 153, 153));
+        txt_nombre_cambiar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(44, 47, 112)));
+        txt_nombre_cambiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nombre_cambiarActionPerformed(evt);
+            }
+        });
+        jPanel5.add(txt_nombre_cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 310, 40));
+
+        jLabel15.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel15.setText("Apellidos:");
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 80, 30));
+
+        txt_apellido_cambiar.setBackground(new java.awt.Color(153, 153, 153));
+        txt_apellido_cambiar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(44, 47, 112)));
+        txt_apellido_cambiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_apellido_cambiarActionPerformed(evt);
+            }
+        });
+        jPanel5.add(txt_apellido_cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 310, 40));
+
+        jLabel16.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel16.setText("Número Cédula:");
+        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, 120, 30));
+
+        txt_cedula_cambiar.setBackground(new java.awt.Color(153, 153, 153));
+        txt_cedula_cambiar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(44, 47, 112)));
+        txt_cedula_cambiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cedula_cambiarActionPerformed(evt);
+            }
+        });
+        jPanel5.add(txt_cedula_cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 310, 40));
+
+        BtnEditar1.setBackground(new java.awt.Color(44, 47, 112));
+        BtnEditar1.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        BtnEditar1.setForeground(new java.awt.Color(255, 255, 255));
+        BtnEditar1.setText("Editar Información");
+        BtnEditar1.setBorder(null);
+        jPanel5.add(BtnEditar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 510, 190, 40));
+
+        lb_infopersonal.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        lb_infopersonal.setForeground(new java.awt.Color(51, 51, 51));
+        lb_infopersonal.setText("Información Personal");
+        jPanel5.add(lb_infopersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 220, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -211,11 +288,16 @@ public class Editar_info extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
-        // TODO add your handling code here:
+        this.setState(Editar_info.ICONIFIED);
     }//GEN-LAST:event_jLabel23MouseClicked
 
     private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
-        // TODO add your handling code here:
+        int dialog = JOptionPane.YES_NO_OPTION;
+        int result = JOptionPane.showConfirmDialog(null,"Desea salir de la aplicación?","Salir", dialog);
+        if (result == 0)
+        {
+            System.exit(0);
+        }
     }//GEN-LAST:event_jLabel24MouseClicked
 
     private void Herramientas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Herramientas1MouseClicked
@@ -230,12 +312,17 @@ public class Editar_info extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Jlabel_calculadora1MouseClicked
 
-    private void label_nombre1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_label_nombre1KeyReleased
+    private void label_nombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_label_nombreKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_label_nombre1KeyReleased
+    }//GEN-LAST:event_label_nombreKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Bienvenida m = new Bienvenida();
+        Bienvenida m = null;
+        try {
+            m = new Bienvenida();
+        } catch (IOException ex) {
+            Logger.getLogger(Editar_info.class.getName()).log(Level.SEVERE, null, ex);
+        }
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -243,6 +330,22 @@ public class Editar_info extends javax.swing.JFrame {
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void txt_email_cambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_email_cambiarActionPerformed
+
+    }//GEN-LAST:event_txt_email_cambiarActionPerformed
+
+    private void txt_nombre_cambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombre_cambiarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombre_cambiarActionPerformed
+
+    private void txt_apellido_cambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_apellido_cambiarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_apellido_cambiarActionPerformed
+
+    private void txt_cedula_cambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cedula_cambiarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cedula_cambiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,21 +389,30 @@ public class Editar_info extends javax.swing.JFrame {
     private javax.swing.JLabel Jlabel_calculadora1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel jlblInternet1;
     private javax.swing.JLabel label_estudiante1;
-    private javax.swing.JLabel label_nombre1;
-    private javax.swing.JLabel lb_apelli1;
+    private javax.swing.JLabel label_nombre;
+    private javax.swing.JLabel lb_apelli;
     private javax.swing.JLabel lb_apellidos1;
-    private javax.swing.JLabel lb_cedula1;
-    private javax.swing.JLabel lb_codigo1;
-    private javax.swing.JLabel lb_email1;
+    private javax.swing.JLabel lb_cedula;
+    private javax.swing.JLabel lb_codigo;
+    private javax.swing.JLabel lb_email;
+    private javax.swing.JLabel lb_infopersonal;
+    private javax.swing.JTextField txt_apellido_cambiar;
+    private javax.swing.JTextField txt_cedula_cambiar;
+    private javax.swing.JTextField txt_email_cambiar;
+    private javax.swing.JTextField txt_nombre_cambiar;
     // End of variables declaration//GEN-END:variables
 }

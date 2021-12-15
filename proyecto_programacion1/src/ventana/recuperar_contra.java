@@ -79,9 +79,7 @@ public class recuperar_contra extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,9 +94,9 @@ public class recuperar_contra extends javax.swing.JFrame {
         try {
             m.enviarcorreo_contra();
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MessagingException ex) {
-            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
         }
   
     }//GEN-LAST:event_jButton1ActionPerformed
