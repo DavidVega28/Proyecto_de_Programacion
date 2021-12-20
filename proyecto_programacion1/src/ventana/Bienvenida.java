@@ -26,15 +26,16 @@ public class Bienvenida extends javax.swing.JFrame {
         lb_apelli.setText(m.texto_apellidos);
         lb_cedula.setText(m.texto_numcedula);
         lb_email.setText(m.texto_email);
+        lb_codigoestudiantil.setText(m.codigo_Est);
         
         if(componentes.rol == "Administrador"){
             label_estudiante.setVisible(false);
-            lb_codigo.setVisible(false);
+            lb_codigoestudiantil.setVisible(false);
             bt_carreras.setVisible(true);
             bt_estudiantes.setVisible(true);
         }else{
             label_estudiante.setVisible(true);
-            lb_codigo.setVisible(true);
+            lb_codigoestudiantil.setVisible(true);
             bt_carreras.setVisible(false);
             bt_estudiantes.setVisible(false);
         }
@@ -58,7 +59,7 @@ public class Bienvenida extends javax.swing.JFrame {
         Jlabel_calculadora = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        lb_codigo = new javax.swing.JLabel();
+        lb_codigoestudiantil = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lb_apelli = new javax.swing.JLabel();
         lb_apellidos = new javax.swing.JLabel();
@@ -196,8 +197,8 @@ public class Bienvenida extends javax.swing.JFrame {
         jLabel1.setText("Información Personal");
         JPIngreso.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 170, 30));
 
-        lb_codigo.setForeground(new java.awt.Color(153, 153, 153));
-        JPIngreso.add(lb_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 250, 20));
+        lb_codigoestudiantil.setForeground(new java.awt.Color(153, 153, 153));
+        JPIngreso.add(lb_codigoestudiantil, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 250, 20));
 
         jLabel3.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
@@ -741,8 +742,8 @@ public class Bienvenida extends javax.swing.JFrame {
     private javax.swing.JLabel lb_apellidos1;
     private javax.swing.JLabel lb_cedula;
     private javax.swing.JLabel lb_cedula1;
-    private javax.swing.JLabel lb_codigo;
     private javax.swing.JLabel lb_codigo1;
+    private javax.swing.JLabel lb_codigoestudiantil;
     private javax.swing.JLabel lb_cursosmtriculados;
     private javax.swing.JLabel lb_email;
     private javax.swing.JLabel lb_email1;

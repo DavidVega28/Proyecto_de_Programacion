@@ -19,38 +19,39 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class Registro_final extends javax.swing.JFrame {
 
     private static Scanner sc;
     private static int intentos;
-    private static String user,pass;
+    private static String user, pass;
 
     public static String texto_nombre = "";
     public static String texto_apellidos = "";
     public static String texto_numcedula = "";
     public static String texto_email = "";
-    
-    File archivoIniciosesion = new File ("Contrayusuario.txt");
+    public static String codigo_Est = "";
+
+    File archivoIniciosesion = new File("Contrayusuario.txt");
     File archivoregistro = new File("Registro.txt");
     String opcion = "Nuevo";
-    
+
     public Registro_final() {
         initComponents();
         layeredpane.removeAll();
         layeredpane.add(panel_login);
         layeredpane.repaint();
         layeredpane.revalidate();
-        
+
         this.setLocationRelativeTo(null);
         this.lb_ocultar1.setVisible(false);
-        
+
         try {
             verificarArchivo();
         } catch (IOException ex) {
@@ -591,6 +592,7 @@ public class Registro_final extends javax.swing.JFrame {
             verificarInformacion();
         }
     }
+
     private void verificarArchivo1() throws IOException {
 
         if (!archivoIniciosesion.exists()) {
@@ -603,7 +605,8 @@ public class Registro_final extends javax.swing.JFrame {
             verificar_contrayusuario();
         }
     }
-    private void verificar_contrayusuario()throws FileNotFoundException, IOException{
+
+    private void verificar_contrayusuario() throws FileNotFoundException, IOException {
         String linea = null;
         int numeroRegistros = 0;
 
@@ -630,11 +633,11 @@ public class Registro_final extends javax.swing.JFrame {
 
                 datos[posicion][0] = st.nextToken().trim();
 
-
             }
             leerArchivo.close();
         }
     }
+
     private void verificarInformacion() throws FileNotFoundException, IOException {
 
         String linea = null;
@@ -673,19 +676,22 @@ public class Registro_final extends javax.swing.JFrame {
             leerArchivo.close();
         }
     }
-    private void guardar_contrayusuario() throws FileNotFoundException, UnsupportedEncodingException, IOException{
-        BufferedWriter escribirArchivo1 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivoIniciosesion,true),"utf-8"));
-        escribirArchivo1.write(txt_usuario.getText()+"\n"+txt_contra.getText()+"\n");
+
+    private void guardar_contrayusuario() throws FileNotFoundException, UnsupportedEncodingException, IOException {
+        BufferedWriter escribirArchivo1 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivoIniciosesion, true), "utf-8"));
+        escribirArchivo1.write(txt_usuario.getText() + "\n" + txt_contra.getText() + "\n");
         verificar_contrayusuario();
         escribirArchivo1.close();
     }
-    private void guardarregistro() throws FileNotFoundException, UnsupportedEncodingException, IOException{
-    
-        BufferedWriter escribirArchivo = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivoregistro,true),"utf-8"));
-        escribirArchivo.write(txt_nombre.getText()+","+txt_apelli.getText()+","+txt_numcedula.getText()+","+txt_email.getText()+","+txt_usuario.getText()+","+txt_contra.getText()+","+txt_celular.getText()+"\n");
+
+    private void guardarregistro() throws FileNotFoundException, UnsupportedEncodingException, IOException {
+
+        BufferedWriter escribirArchivo = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivoregistro, true), "utf-8"));
+        escribirArchivo.write(txt_nombre.getText() + "," + txt_apelli.getText() + "," + txt_numcedula.getText() + "," + txt_email.getText() + "," + txt_usuario.getText() + "," + txt_contra.getText() + "," + txt_celular.getText() + "\n");
         verificarInformacion();
         escribirArchivo.close();
     }
+
     private void OpenInternet() {
         try {
             Desktop.getDesktop().browse(URI.create("www.google.com"));
@@ -736,57 +742,57 @@ public class Registro_final extends javax.swing.JFrame {
             rol = "Estudiante";
         }
         System.out.println(rol);
-        
+
         FileReader fr = null;
         try {
             int nLineas = 0;
             int i = 0;
-            String []usuarios = null;
+            String[] usuarios = null;
             String linea;
             try {
-                sc = new Scanner (new File("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt"));
+                sc = new Scanner(new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt"));
             } catch (FileNotFoundException ex) {
                 java.util.logging.Logger.getLogger(Registro_final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-            File f = new File("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt");
+            File f = new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt");
             fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
             try {
-                while ((linea = br.readLine())!= null){
+                while ((linea = br.readLine()) != null) {
                     nLineas++;
                 }
             } catch (IOException ex) {
                 java.util.logging.Logger.getLogger(Registro_final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-            
-            usuarios = new String [nLineas];//tamaño
-            
-            while(sc.hasNextLine()){
+
+            usuarios = new String[nLineas];//tamaño
+
+            while (sc.hasNextLine()) {
                 usuarios[i++] = sc.nextLine();//Almacenando cada linea 
             }
             intentos++;
-            
+
             user = Nombre_usuario.getText();
             pass = contraseña.getText();
-            
+
             seguridad s = new seguridad();
             try {
                 s.validarUsuario(usuarios, user, pass, intentos);
             } catch (IOException ex) {
                 Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
+
         } catch (FileNotFoundException ex) {
             java.util.logging.Logger.getLogger(Registro_final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         this.dispose();
-        
+
     }//GEN-LAST:event_bt_ingresarActionPerformed
 
     private void lb_ver1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ver1MouseClicked
         lb_ver1.setVisible(false);
         lb_ocultar1.setVisible(true);
-        contraseña.setEchoChar((char)0);
+        contraseña.setEchoChar((char) 0);
     }//GEN-LAST:event_lb_ver1MouseClicked
 
     private void lb_ocultar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ocultar1MouseClicked
@@ -912,12 +918,12 @@ public class Registro_final extends javax.swing.JFrame {
                 rol = "Administrador";
             } else if (RBestudiante_registro.isSelected()) {
                 rol = "Estudiante";
-            }           
-            Usuario m = new Usuario(txt_usuario.getText());
+            }
+            Usuario m = new Usuario(txt_nombre.getText(), txt_apelli.getText(), txt_numcedula.getText(), txt_usuario.getText(), txt_contra.getText(), txt_celular.getText(), txt_email.getText(), rol);
             System.out.println(rol);
             enviar_Correo m1 = new enviar_Correo(txt_email.getText());
             m1.enviarcorreo();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Usuario registrado exitosamente.");
 
         } catch (Exception e) {
@@ -930,7 +936,7 @@ public class Registro_final extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             guardar_contrayusuario();
         } catch (UnsupportedEncodingException ex) {
@@ -938,11 +944,31 @@ public class Registro_final extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
+
         texto_nombre = txt_nombre.getText();
         texto_apellidos = txt_apelli.getText();
         texto_numcedula = txt_numcedula.getText();
         texto_email = txt_email.getText();
+        
+        Random codi = new Random();
+
+        String abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String codigoEst = "";
+        int m = 0, pos = 0, num;
+
+        while (m < 1) {
+            pos = (int) (codi.nextDouble() * abc.length() - 1 + 0);
+            num = (int) (codi.nextDouble() * 9999 + 1000);
+            codigoEst = codigoEst + abc.charAt(pos) + num;
+            pos = (int) (codi.nextDouble() + abc.length() - 1 + 0);
+            codigoEst = codigoEst + abc.charAt(pos);
+
+            System.out.println("Codigo de estudiante" + " : " + codigoEst + "\n");
+            codigoEst = "";
+            m++;
+            
+            codigo_Est = codigoEst;
+        }
 
         txt_nombre.setText("");
         txt_apelli.setText("");
@@ -956,7 +982,6 @@ public class Registro_final extends javax.swing.JFrame {
     private void rb_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_adminActionPerformed
 
     }//GEN-LAST:event_rb_adminActionPerformed
-
 
     public static void main(String args[]) {
 
