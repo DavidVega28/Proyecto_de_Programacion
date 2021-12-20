@@ -481,6 +481,12 @@ public class Bienvenida extends javax.swing.JFrame {
             }
         });
         jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 110, 30));
+
+        lb_cursosmtriculados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_cursosmtriculadosMouseClicked(evt);
+            }
+        });
         jPanel5.add(lb_cursosmtriculados, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 150, 110));
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -563,22 +569,14 @@ public class Bienvenida extends javax.swing.JFrame {
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         Registro_final m = null;
-        try {
-            m = new Registro_final();
-        } catch (IOException ex) {
-            Logger.getLogger(Bienvenida.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        m = new Registro_final();
         m.setVisible(true);
         m.dispose();
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         Registro_final m = null;
-        try {
-            m = new Registro_final();
-        } catch (IOException ex) {
-            Logger.getLogger(Bienvenida.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        m = new Registro_final();
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_loginActionPerformed
@@ -672,6 +670,10 @@ public class Bienvenida extends javax.swing.JFrame {
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void lb_cursosmtriculadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_cursosmtriculadosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lb_cursosmtriculadosMouseClicked
 
     /**
      * @param args the command line arguments

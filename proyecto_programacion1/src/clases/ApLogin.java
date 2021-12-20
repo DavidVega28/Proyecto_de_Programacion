@@ -14,11 +14,7 @@ import ventana.Registro_final;
 public class ApLogin {
     public static void main(String[] args){
         Registro_final abrir = null;
-        try {
-            abrir = new Registro_final();
-        } catch (IOException ex) {
-            Logger.getLogger(ApLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        abrir = new Registro_final();
         abrir.setVisible(true);
        
 }}

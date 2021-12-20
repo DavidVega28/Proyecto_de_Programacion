@@ -7,6 +7,7 @@ package ventana;
 import AppPackage.AnimationClass;
 import clases.Usuario;
 import clases.enviar_Correo;
+import clases.seguridad;
 import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,15 +28,20 @@ import javax.swing.JOptionPane;
 
 public class Registro_final extends javax.swing.JFrame {
 
+    private static Scanner sc;
+    private static int intentos;
+    private static String user,pass;
+
     public static String texto_nombre = "";
     public static String texto_apellidos = "";
     public static String texto_numcedula = "";
     public static String texto_email = "";
     
+    File archivoIniciosesion = new File ("Contrayusuario.txt");
     File archivoregistro = new File("Registro.txt");
     String opcion = "Nuevo";
     
-    public Registro_final() throws IOException {
+    public Registro_final() {
         initComponents();
         layeredpane.removeAll();
         layeredpane.add(panel_login);
@@ -44,14 +51,23 @@ public class Registro_final extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.lb_ocultar1.setVisible(false);
         
-        verificarArchivo();
+        try {
+            verificarArchivo();
+        } catch (IOException ex) {
+            Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        rootPane.setDefaultButton(bt_ingresar);
     }
 
+    public static void setIntentos(int intentos) {
+        Registro_final.intentos = intentos;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         JPIngreso = new javax.swing.JPanel();
@@ -69,8 +85,8 @@ public class Registro_final extends javax.swing.JFrame {
         Jlabel_calculadora = new javax.swing.JLabel();
         bt_registrar = new javax.swing.JButton();
         bt_ingresar = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rb_admin = new javax.swing.JRadioButton();
+        rb_estu = new javax.swing.JRadioButton();
         lb_ver1 = new javax.swing.JLabel();
         lb_ocultar1 = new javax.swing.JLabel();
         lb_olvidocontraseña = new javax.swing.JLabel();
@@ -215,20 +231,20 @@ public class Registro_final extends javax.swing.JFrame {
         });
         JPIngreso.add(bt_ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 110, 40));
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jRadioButton1.setText("Administrador");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        rb_admin.setBackground(new java.awt.Color(255, 255, 255));
+        rb_admin.setForeground(new java.awt.Color(51, 51, 51));
+        rb_admin.setText("Administrador");
+        rb_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rb_adminActionPerformed(evt);
             }
         });
-        JPIngreso.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
+        JPIngreso.add(rb_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setForeground(new java.awt.Color(51, 51, 51));
-        jRadioButton2.setText("Estudiante");
-        JPIngreso.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, -1, 20));
+        rb_estu.setBackground(new java.awt.Color(255, 255, 255));
+        rb_estu.setForeground(new java.awt.Color(51, 51, 51));
+        rb_estu.setText("Estudiante");
+        JPIngreso.add(rb_estu, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, -1, 20));
 
         lb_ver1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ver_32px.png"))); // NOI18N
         lb_ver1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -575,7 +591,50 @@ public class Registro_final extends javax.swing.JFrame {
             verificarInformacion();
         }
     }
+    private void verificarArchivo1() throws IOException {
 
+        if (!archivoIniciosesion.exists()) {
+
+            archivoIniciosesion.createNewFile();
+            System.out.println("Archivo creado.");
+        } else {
+
+            System.out.println("Archivo existente.");
+            verificar_contrayusuario();
+        }
+    }
+    private void verificar_contrayusuario()throws FileNotFoundException, IOException{
+        String linea = null;
+        int numeroRegistros = 0;
+
+        BufferedReader leer = new BufferedReader(new FileReader(archivoIniciosesion));
+
+        while ((linea = leer.readLine()) != null) {
+            numeroRegistros += 1;
+        }
+        leer.close();
+
+        if (numeroRegistros == 0) {
+
+            JOptionPane.showMessageDialog(rootPane, "El archivo se encuentra vacío.");
+        } else {
+            String[][] datos = new String[numeroRegistros][1];
+            int posicion = 0;
+            String linealeida = null;
+
+            BufferedReader leerArchivo = new BufferedReader(new FileReader(archivoIniciosesion));
+
+            while ((linealeida = leerArchivo.readLine()) != null) {
+
+                StringTokenizer st = new StringTokenizer(linealeida, "\n");
+
+                datos[posicion][0] = st.nextToken().trim();
+
+
+            }
+            leerArchivo.close();
+        }
+    }
     private void verificarInformacion() throws FileNotFoundException, IOException {
 
         String linea = null;
@@ -613,6 +672,12 @@ public class Registro_final extends javax.swing.JFrame {
             }
             leerArchivo.close();
         }
+    }
+    private void guardar_contrayusuario() throws FileNotFoundException, UnsupportedEncodingException, IOException{
+        BufferedWriter escribirArchivo1 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivoIniciosesion,true),"utf-8"));
+        escribirArchivo1.write(txt_usuario.getText()+"\n"+txt_contra.getText()+"\n");
+        verificar_contrayusuario();
+        escribirArchivo1.close();
     }
     private void guardarregistro() throws FileNotFoundException, UnsupportedEncodingException, IOException{
     
@@ -664,34 +729,58 @@ public class Registro_final extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_registrarActionPerformed
 
     private void bt_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ingresarActionPerformed
-        String usuario = Nombre_usuario.getText();
-        String contra = contraseña.getText();
-
-        boolean e = true;
-
-        for (int i = 0; i < componentes.usuarios.size(); i++) {
-            if (componentes.usuarios.get(i).getUsuario().equals(usuario) && componentes.usuarios.get(i).getContra().equals(contra)) {
-                e = true;
-                componentes.rol = componentes.usuarios.get(i).getRol();
-                break;
-            } else {
-                e = false;
-            }
+        String rol = "";
+        if (rb_admin.isSelected()) {
+            rol = "Administrador";
+        } else if (rb_estu.isSelected()) {
+            rol = "Estudiante";
         }
-        if (e) {
-            JOptionPane.showMessageDialog(rootPane, "Usuario y contraseña correctos");
-            Bienvenida p = null;
+        System.out.println(rol);
+        
+        FileReader fr = null;
+        try {
+            int nLineas = 0;
+            int i = 0;
+            String []usuarios = null;
+            String linea;
             try {
-                p = new Bienvenida();
+                sc = new Scanner (new File("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt"));
+            } catch (FileNotFoundException ex) {
+                java.util.logging.Logger.getLogger(Registro_final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            File f = new File("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt");
+            fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+            try {
+                while ((linea = br.readLine())!= null){
+                    nLineas++;
+                }
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(Registro_final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            
+            usuarios = new String [nLineas];//tamaño
+            
+            while(sc.hasNextLine()){
+                usuarios[i++] = sc.nextLine();//Almacenando cada linea 
+            }
+            intentos++;
+            
+            user = Nombre_usuario.getText();
+            pass = contraseña.getText();
+            
+            seguridad s = new seguridad();
+            try {
+                s.validarUsuario(usuarios, user, pass, intentos);
             } catch (IOException ex) {
                 Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
             }
-            p.setVisible(true);
-            this.setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrectos");
+           
+        } catch (FileNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Registro_final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
+        this.dispose();
+        
     }//GEN-LAST:event_bt_ingresarActionPerformed
 
     private void lb_ver1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ver1MouseClicked
@@ -823,11 +912,12 @@ public class Registro_final extends javax.swing.JFrame {
                 rol = "Administrador";
             } else if (RBestudiante_registro.isSelected()) {
                 rol = "Estudiante";
-            }
-            Usuario m = new Usuario(txt_nombre.getText(), txt_apelli.getText(), txt_numcedula.getText(), txt_usuario.getText(), txt_contra.getText(), txt_celular.getText(), txt_email.getText(), rol);
+            }           
+            Usuario m = new Usuario(txt_usuario.getText());
+            System.out.println(rol);
             enviar_Correo m1 = new enviar_Correo(txt_email.getText());
             m1.enviarcorreo();
-            componentes.usuarios.add(m);
+            
             JOptionPane.showMessageDialog(rootPane, "Usuario registrado exitosamente.");
 
         } catch (Exception e) {
@@ -840,6 +930,15 @@ public class Registro_final extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        try {
+            guardar_contrayusuario();
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
         texto_nombre = txt_nombre.getText();
         texto_apellidos = txt_apelli.getText();
         texto_numcedula = txt_numcedula.getText();
@@ -854,20 +953,16 @@ public class Registro_final extends javax.swing.JFrame {
         txt_email.setText("");
     }//GEN-LAST:event_btn_RegistrarseActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rb_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_adminActionPerformed
 
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_rb_adminActionPerformed
 
 
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new Registro_final().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new Registro_final().setVisible(true);
             }
         });
     }
@@ -882,6 +977,7 @@ public class Registro_final extends javax.swing.JFrame {
     private javax.swing.JButton bt_ingresar;
     private javax.swing.JButton bt_registrar;
     private javax.swing.JButton btn_Registrarse;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JPasswordField contraseña;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
@@ -916,8 +1012,6 @@ public class Registro_final extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel jlblInternet;
@@ -927,6 +1021,8 @@ public class Registro_final extends javax.swing.JFrame {
     private javax.swing.JLabel lb_ver1;
     private javax.swing.JPanel panel_login;
     private javax.swing.JPanel panel_registro;
+    private javax.swing.JRadioButton rb_admin;
+    private javax.swing.JRadioButton rb_estu;
     private javax.swing.JTextField txt_apelli;
     private javax.swing.JTextField txt_celular;
     private javax.swing.JTextField txt_contra;
