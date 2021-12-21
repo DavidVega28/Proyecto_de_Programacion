@@ -269,7 +269,7 @@ public class Ver_cursos extends javax.swing.JFrame {
     private void llenar_combo (){
 
           try {
-          BufferedReader br=new BufferedReader(new FileReader("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Carreras.txt"));
+          BufferedReader br=new BufferedReader(new FileReader("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Carreras.txt"));
           String linea;
           JComboBox<String> combo = new JComboBox<String>();
           while((linea = br.readLine()) != null) {
@@ -344,7 +344,7 @@ public class Ver_cursos extends javax.swing.JFrame {
         DefaultTableModel modelo = new DefaultTableModel();
 
 	try {
-		File archivo = new File("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Cursos_Administración.txt");
+		File archivo = new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Cursos_Administración.txt");
 		if (archivo.exists()) {
 			br = new BufferedReader(new FileReader(archivo));
 			String linea;

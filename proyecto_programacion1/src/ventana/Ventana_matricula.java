@@ -301,7 +301,7 @@ public class Ventana_matricula extends javax.swing.JFrame {
     private void llenar_combo (){
 
           try {
-          BufferedReader br=new BufferedReader(new FileReader("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Carreras.txt"));
+          BufferedReader br=new BufferedReader(new FileReader("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Carreras.txt"));
           String linea;
           JComboBox<String> combo = new JComboBox<String>();
           while((linea = br.readLine()) != null) {

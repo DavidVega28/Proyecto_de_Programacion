@@ -673,7 +673,7 @@ public class Registro_final extends javax.swing.JFrame {
                 datos[posicion][4] = st.nextToken().trim();
                 datos[posicion][5] = st.nextToken().trim();
                 datos[posicion][6] = st.nextToken().trim();
- 
+
             }
             leerArchivo.close();
         }
@@ -752,11 +752,11 @@ public class Registro_final extends javax.swing.JFrame {
             String[] usuarios = null;
             String linea;
             try {
-                sc = new Scanner(new File("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt"));
+                sc = new Scanner(new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt"));
             } catch (FileNotFoundException ex) {
                 java.util.logging.Logger.getLogger(Registro_final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-            File f = new File("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt");
+            File f = new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt");
             fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
             try {
@@ -919,7 +919,41 @@ public class Registro_final extends javax.swing.JFrame {
                 rol = "Administrador";
             } else if (RBestudiante_registro.isSelected()) {
                 rol = "Estudiante";
+
+                int cedu = 0, cel = 0;
+                String name = "", lasName = "";
+
+                try {
+
+                    name = String.format(txt_nombre.getText());
+
+                } catch (Exception q) {
+
+                    JOptionPane.showMessageDialog(rootPane, "Su nombre puede contener caracteres incorrectos");
+                }
+
+                try {
+
+                    cedu = Integer.parseInt(txt_numcedula.getText());
+
+                } catch (Exception ax) {
+
+                    JOptionPane.showMessageDialog(rootPane, "Su número de cédula consta de 9 digitos" + "\n"
+                            + "Por favor digitelo sin guiones ni espacios");
+                }
+
+                try {
+
+                    cel = Integer.parseInt(txt_celular.getText());
+
+                } catch (Exception a) {
+
+                    JOptionPane.showMessageDialog(rootPane, "Su número de celular contiene caracteres incorrectos" + "\n"
+                            + "Por favor digitelo correctamente");
+                }
             }
+            
+                
             Usuario m = new Usuario(txt_nombre.getText(), txt_apelli.getText(), txt_numcedula.getText(), txt_usuario.getText(), txt_contra.getText(), txt_celular.getText(), txt_email.getText(), rol, codigo_Est);
             System.out.println(rol);
             enviar_Correo m1 = new enviar_Correo(txt_email.getText());
@@ -950,7 +984,7 @@ public class Registro_final extends javax.swing.JFrame {
         texto_apellidos = txt_apelli.getText();
         texto_numcedula = txt_numcedula.getText();
         texto_email = txt_email.getText();
-        
+
         Random codi = new Random();
 
         String abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -964,9 +998,9 @@ public class Registro_final extends javax.swing.JFrame {
             pos = (int) (codi.nextDouble() + abc.length() - 1 + 0);
             codigoEst = codigoEst + abc.charAt(pos);
 
-            System.out.println("Codigo de estudiante" + " : " + codigoEst + "\n"); 
+            System.out.println("Codigo de estudiante" + " : " + codigoEst + "\n");
             m++;
-            
+
             codigo_Est = codigoEst;
         }
 
