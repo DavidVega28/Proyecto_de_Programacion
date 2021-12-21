@@ -2,3 +2,5 @@ AD234,Administración,2
 IN445,Ingenieria en Sistemas,3
 FA654,Farmacia,2
 DE656,Derecho,2
+ED2312,Educacion Fisica,2
+CO1231,Contabilidad,1

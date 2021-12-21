@@ -1,2 +1,2 @@
-Matematica General,MA567,3
-Calculo I, CA568,2
+Matematica,MA13213,3
+Calculo I, CA324,2

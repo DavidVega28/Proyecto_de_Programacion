@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -28,15 +29,18 @@ import javax.swing.table.DefaultTableModel;
 import static ventana.Ventana_matricula.combo_carreras;
 
 public class Ver_cursos extends javax.swing.JFrame {
-        
-    
+
+    File archivocursos = new File("Cursos_Administración.txt");
+    String opcion = "Nuevo";
+
     public Ver_cursos() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+
         llenar_combo();
-       
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -223,7 +227,7 @@ public class Ver_cursos extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "Curso", "Código", "Créditos"
             }
         ));
         jScrollPane1.setViewportView(tabla);
@@ -265,36 +269,77 @@ public class Ver_cursos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-     
-    private void llenar_combo (){
+    private void verificarInformacion() throws FileNotFoundException, IOException {
+        String linea = null;
+        int numeroRegistros = 0;
 
-          try {
-          BufferedReader br=new BufferedReader(new FileReader("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Carreras.txt"));
-          String linea;
-          JComboBox<String> combo = new JComboBox<String>();
-          while((linea = br.readLine()) != null) {
-            StringTokenizer tokens = new StringTokenizer(linea,",");
-            System.out.println(tokens.nextElement());
-            combo_vercarreras.addItem(tokens.nextToken());
-            
-          }
-          br.close();
-        } catch(Exception x) {
-          x.printStackTrace();
+        BufferedReader leer = new BufferedReader(new FileReader(archivocursos));
+        while ((linea = leer.readLine()) != null) {
+            numeroRegistros += 1;
+        }
+        leer.close();
+        if (numeroRegistros == 0) {
+            JOptionPane.showMessageDialog(rootPane, "El archivo esta vacio");
+        } else {
+            String[][] datos = new String[numeroRegistros][3];
+            int posicion = 0;
+            String linealeida = null;
+            BufferedReader leerarchivo = new BufferedReader(new FileReader(archivocursos));
+            while ((linealeida = leerarchivo.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linealeida, ",");
+
+                datos[posicion][0] = st.nextToken().trim();
+                datos[posicion][1] = st.nextToken().trim();
+                datos[posicion][2] = st.nextToken().trim();
+
+                posicion += 1;
+            }
+
+            leerarchivo.close();
+            DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+            limpliartabla(modelo);
+            for (int i = 0; i < datos.length; i++) {
+
+                String[] data = new String[3];
+                for (int j = 0; j < datos[i].length; j++) {
+                    data[(j)] = datos[i][j];
+                }
+                modelo.addRow(data);
+            }
+
         }
     }
-    private void llenar_tabla_admi(){
-
+    public void limpliartabla(DefaultTableModel modelo){
+        for (int i = tabla.getRowCount() -1; i >=0 ; i--) {
+            modelo.removeRow(i);
+        }
     }
+    private void llenar_combo() {
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Carreras.txt"));
+            String linea;
+            JComboBox<String> combo = new JComboBox<String>();
+            while ((linea = br.readLine()) != null) {
+                StringTokenizer tokens = new StringTokenizer(linea, ",");
+                System.out.println(tokens.nextElement());
+                combo_vercarreras.addItem(tokens.nextToken());
+
+            }
+            br.close();
+        } catch (Exception x) {
+            x.printStackTrace();
+        }
+    }
+
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
         this.setState(Ver_cursos.ICONIFIED);
     }//GEN-LAST:event_jLabel23MouseClicked
 
     private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
         int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null,"Desea salir de la aplicación?","Salir", dialog);
-        if (result == 0)
-        {
+        int result = JOptionPane.showConfirmDialog(null, "Desea salir de la aplicación?", "Salir", dialog);
+        if (result == 0) {
             System.exit(0);
         }
     }//GEN-LAST:event_jLabel24MouseClicked
@@ -339,40 +384,12 @@ public class Ver_cursos extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_seleccionarcarreraMouseClicked
 
     private void bt_seleccionarcarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_seleccionarcarreraActionPerformed
-        {
-	BufferedReader br = null;
-        DefaultTableModel modelo = new DefaultTableModel();
-
-	try {
-		File archivo = new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Cursos_Administración.txt");
-		if (archivo.exists()) {
-			br = new BufferedReader(new FileReader(archivo));
-			String linea;
-
-			while ((linea = br.readLine()) != null) {
-				StringTokenizer token = new StringTokenizer(linea, ";");
-                                String curso = token.nextToken().trim();
-                                String codigo = token.nextToken().trim();
-                                String creditos = token.nextToken().trim();
-                                ;
-
-				Object[] obj = new Object[] {
-					curso, codigo, creditos,
-				};
-				modelo.addRow(obj);
-			}
-			br.close();
-                        tabla.setModel(modelo);
-		}
-		else
-			JOptionPane.showMessageDialog(null, "No existe el archivo");
-	}
-	catch (IOException ex) {
-		System.out.println("Error al leer el archivo\n" + ex.getMessage());
-	}
-}
+        try {
+            verificarInformacion();
+        } catch (IOException ex) {
+            Logger.getLogger(Ver_cursos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bt_seleccionarcarreraActionPerformed
-
 
     public static void main(String args[]) {
 

@@ -69,6 +69,7 @@ public class Registro_final extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         JPIngreso = new javax.swing.JPanel();
@@ -556,11 +557,13 @@ public class Registro_final extends javax.swing.JFrame {
         panel_registro.add(btn_Registrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 500, 170, 40));
 
         RBadmin_registro.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup2.add(RBadmin_registro);
         RBadmin_registro.setForeground(new java.awt.Color(51, 51, 51));
         RBadmin_registro.setText("Administrador");
         panel_registro.add(RBadmin_registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, -1, -1));
 
         RBestudiante_registro.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup2.add(RBestudiante_registro);
         RBestudiante_registro.setForeground(new java.awt.Color(51, 51, 51));
         RBestudiante_registro.setText("Estudiante");
         panel_registro.add(RBestudiante_registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 440, -1, -1));
@@ -664,7 +667,7 @@ public class Registro_final extends javax.swing.JFrame {
 
             while ((linealeida = leerArchivo.readLine()) != null) {
 
-                StringTokenizer st = new StringTokenizer(linealeida, ",");
+                StringTokenizer st = new StringTokenizer(linealeida, "\n");
 
                 datos[posicion][0] = st.nextToken().trim();
                 datos[posicion][1] = st.nextToken().trim();
@@ -752,11 +755,11 @@ public class Registro_final extends javax.swing.JFrame {
             String[] usuarios = null;
             String linea;
             try {
-                sc = new Scanner(new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt"));
+                sc = new Scanner(new File("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt"));
             } catch (FileNotFoundException ex) {
                 java.util.logging.Logger.getLogger(Registro_final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-            File f = new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt");
+            File f = new File("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt");
             fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
             try {
@@ -1037,6 +1040,7 @@ public class Registro_final extends javax.swing.JFrame {
     private javax.swing.JButton bt_registrar;
     private javax.swing.JButton btn_Registrarse;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JPasswordField contraseña;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;

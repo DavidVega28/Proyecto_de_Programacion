@@ -64,37 +64,48 @@ public class Añadir_carreras extends javax.swing.JFrame {
     }
 
     private void verificarInformacion() throws FileNotFoundException, IOException {
-
         String linea = null;
         int numeroRegistros = 0;
 
         BufferedReader leer = new BufferedReader(new FileReader(archivocarreras));
-
         while ((linea = leer.readLine()) != null) {
             numeroRegistros += 1;
         }
         leer.close();
-
         if (numeroRegistros == 0) {
-
-            JOptionPane.showMessageDialog(rootPane, "El archivo se encuentra vacío.");
+            JOptionPane.showMessageDialog(rootPane, "El archivo esta vacio");
         } else {
             String[][] datos = new String[numeroRegistros][3];
             int posicion = 0;
             String linealeida = null;
-
-            BufferedReader leerArchivo = new BufferedReader(new FileReader(archivocarreras));
-
-            while ((linealeida = leerArchivo.readLine()) != null) {
-
+            BufferedReader leerarchivo = new BufferedReader(new FileReader(archivocarreras));
+            while ((linealeida = leerarchivo.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(linealeida, ",");
 
                 datos[posicion][0] = st.nextToken().trim();
                 datos[posicion][1] = st.nextToken().trim();
                 datos[posicion][2] = st.nextToken().trim();
 
+                posicion += 1;
             }
-            leerArchivo.close();
+
+            leerarchivo.close();
+            DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+            limpliartabla(modelo);
+            for (int i = 0; i < datos.length; i++) {
+
+                String[] data = new String[3];
+                for (int j = 0; j < datos[i].length; j++) {
+                    data[(j)] = datos[i][j];
+                }
+                modelo.addRow(data);
+            }
+
+        }
+    }
+    public void limpliartabla(DefaultTableModel modelo){
+        for (int i = tabla.getRowCount() -1; i >=0 ; i--) {
+            modelo.removeRow(i);
         }
     }
     private void guardarregistro() throws FileNotFoundException, UnsupportedEncodingException, IOException{
@@ -119,12 +130,12 @@ public class Añadir_carreras extends javax.swing.JFrame {
         txt_codigo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btn_refrescar = new javax.swing.JButton();
-        btn_reportecarreras = new javax.swing.JButton();
+        btn_buscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         btn_añadircarrera2 = new javax.swing.JButton();
-        btn_modificarcarrera2 = new javax.swing.JButton();
-        btn_eliminarcarrera1 = new javax.swing.JButton();
+        txt_filtrar = new javax.swing.JTextField();
+        btn_reportecarreras1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,17 +199,17 @@ public class Añadir_carreras extends javax.swing.JFrame {
         });
         jPanel1.add(btn_refrescar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 220, 130, 40));
 
-        btn_reportecarreras.setBackground(new java.awt.Color(44, 47, 112));
-        btn_reportecarreras.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        btn_reportecarreras.setForeground(new java.awt.Color(255, 255, 255));
-        btn_reportecarreras.setText("Crear reporte");
-        btn_reportecarreras.setBorder(null);
-        btn_reportecarreras.addActionListener(new java.awt.event.ActionListener() {
+        btn_buscar.setBackground(new java.awt.Color(44, 47, 112));
+        btn_buscar.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        btn_buscar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_buscar.setText("Buscar");
+        btn_buscar.setBorder(null);
+        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_reportecarrerasActionPerformed(evt);
+                btn_buscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_reportecarreras, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 550, 110, 30));
+        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 110, 30));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -222,31 +233,23 @@ public class Añadir_carreras extends javax.swing.JFrame {
                 btn_añadircarrera2ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_añadircarrera2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 130, 40));
+        jPanel1.add(btn_añadircarrera2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 130, 40));
 
-        btn_modificarcarrera2.setBackground(new java.awt.Color(44, 47, 112));
-        btn_modificarcarrera2.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        btn_modificarcarrera2.setForeground(new java.awt.Color(255, 255, 255));
-        btn_modificarcarrera2.setText("Modificar Carrera");
-        btn_modificarcarrera2.setBorder(null);
-        btn_modificarcarrera2.addActionListener(new java.awt.event.ActionListener() {
+        txt_filtrar.setBackground(new java.awt.Color(153, 153, 153));
+        txt_filtrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(44, 47, 112)));
+        jPanel1.add(txt_filtrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 260, 30));
+
+        btn_reportecarreras1.setBackground(new java.awt.Color(44, 47, 112));
+        btn_reportecarreras1.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        btn_reportecarreras1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_reportecarreras1.setText("Crear reporte");
+        btn_reportecarreras1.setBorder(null);
+        btn_reportecarreras1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_modificarcarrera2ActionPerformed(evt);
+                btn_reportecarreras1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_modificarcarrera2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 150, 40));
-
-        btn_eliminarcarrera1.setBackground(new java.awt.Color(44, 47, 112));
-        btn_eliminarcarrera1.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        btn_eliminarcarrera1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_eliminarcarrera1.setText("Eliminar carrera");
-        btn_eliminarcarrera1.setBorder(null);
-        btn_eliminarcarrera1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_eliminarcarrera1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_eliminarcarrera1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 130, 40));
+        jPanel1.add(btn_reportecarreras1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 550, 110, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -274,12 +277,32 @@ public class Añadir_carreras extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_volverActionPerformed
 
     private void btn_refrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refrescarActionPerformed
-
+        try {
+            verificarInformacion();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Añadir_carreras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_refrescarActionPerformed
 
-    private void btn_reportecarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportecarrerasActionPerformed
-
-    }//GEN-LAST:event_btn_reportecarrerasActionPerformed
+    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+        String buscar = String.valueOf(txt_filtrar.getText());
+        
+        String [][]datos = new String[tabla.getRowCount()][3];
+        
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+            for (int j = 0; j < 3; j++) {
+                datos[i][j] = String.valueOf(tabla.getValueAt(i, j));
+            }
+        }
+        
+        DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+        limpliartabla(modelo);
+        for (int i = 0; i < datos.length; i++) {
+            if (datos[i][1].equalsIgnoreCase(buscar)) {
+                modelo.addRow(new Object[]{datos[i][0],datos[i][1],datos[i][2]});
+            }
+        }
+    }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void btn_añadircarrera2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_añadircarrera2ActionPerformed
 
@@ -308,21 +331,9 @@ public class Añadir_carreras extends javax.swing.JFrame {
         txt_cupos.setText("");
     }//GEN-LAST:event_btn_añadircarrera2ActionPerformed
 
-    private void btn_modificarcarrera2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarcarrera2ActionPerformed
-     
-    }//GEN-LAST:event_btn_modificarcarrera2ActionPerformed
-
-    private void btn_eliminarcarrera1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarcarrera1ActionPerformed
-        int fila = tabla.getSelectedRow();
-        if(fila>0){
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea eliminar la carrera?", "Eliminar", JOptionPane.YES_NO_OPTION); //0 = SI, 1 = NO
-            if(opcion == 0){
-                arraylist_carreras.Arraycarrera.remove(fila);
-                
-            }
-            
-        }
-    }//GEN-LAST:event_btn_eliminarcarrera1ActionPerformed
+    private void btn_reportecarreras1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportecarreras1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_reportecarreras1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -362,10 +373,9 @@ public class Añadir_carreras extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_añadircarrera2;
-    private javax.swing.JButton btn_eliminarcarrera1;
-    private javax.swing.JButton btn_modificarcarrera2;
+    private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_refrescar;
-    private javax.swing.JButton btn_reportecarreras;
+    private javax.swing.JButton btn_reportecarreras1;
     private javax.swing.JButton btn_volver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -376,6 +386,7 @@ public class Añadir_carreras extends javax.swing.JFrame {
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txt_codigo;
     private javax.swing.JTextField txt_cupos;
+    private javax.swing.JTextField txt_filtrar;
     private javax.swing.JTextField txt_nombrecarrera;
     // End of variables declaration//GEN-END:variables
 

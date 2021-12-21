@@ -3,6 +3,7 @@ package ventana;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -13,11 +14,14 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class Ventana_matricula extends javax.swing.JFrame {
 
-
+    File archivocursos = new File("Cursos_Administración.txt");
+    String opcion = "Nuevo";
+    
     public Ventana_matricula() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -59,7 +63,7 @@ public class Ventana_matricula extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Tabla_matricula1 = new javax.swing.JTable();
+        Tablamatricula1 = new javax.swing.JTable();
         bt_matricular = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -250,7 +254,7 @@ public class Ventana_matricula extends javax.swing.JFrame {
         jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(44, 47, 112)));
         jPanel5.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 310, 30));
 
-        Tabla_matricula1.setModel(new javax.swing.table.DefaultTableModel(
+        Tablamatricula1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -261,7 +265,7 @@ public class Ventana_matricula extends javax.swing.JFrame {
                 "Nombre del curso", "Código", "Créditos"
             }
         ));
-        jScrollPane2.setViewportView(Tabla_matricula1);
+        jScrollPane2.setViewportView(Tablamatricula1);
 
         jPanel5.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 780, 140));
 
@@ -298,10 +302,55 @@ public class Ventana_matricula extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void verificarInformacion() throws FileNotFoundException, IOException {
+        String linea = null;
+        int numeroRegistros = 0;
+
+        BufferedReader leer = new BufferedReader(new FileReader(archivocursos));
+        while ((linea = leer.readLine()) != null) {
+            numeroRegistros += 1;
+        }
+        leer.close();
+        if (numeroRegistros == 0) {
+            JOptionPane.showMessageDialog(rootPane, "El archivo esta vacio");
+        } else {
+            String[][] datos = new String[numeroRegistros][3];
+            int posicion = 0;
+            String linealeida = null;
+            BufferedReader leerarchivo = new BufferedReader(new FileReader(archivocursos));
+            while ((linealeida = leerarchivo.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linealeida, ",");
+
+                datos[posicion][0] = st.nextToken().trim();
+                datos[posicion][1] = st.nextToken().trim();
+                datos[posicion][2] = st.nextToken().trim();
+
+                posicion += 1;
+            }
+
+            leerarchivo.close();
+            DefaultTableModel modelo = (DefaultTableModel) Tablamatricula1.getModel();
+            limpliartabla(modelo);
+            for (int i = 0; i < datos.length; i++) {
+
+                String[] data = new String[3];
+                for (int j = 0; j < datos[i].length; j++) {
+                    data[(j)] = datos[i][j];
+                }
+                modelo.addRow(data);
+            }
+
+        }
+    }
+    public void limpliartabla(DefaultTableModel modelo){
+        for (int i = Tablamatricula1.getRowCount() -1; i >=0 ; i--) {
+            modelo.removeRow(i);
+        }
+    }
     private void llenar_combo (){
 
           try {
-          BufferedReader br=new BufferedReader(new FileReader("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Carreras.txt"));
+          BufferedReader br=new BufferedReader(new FileReader("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Carreras.txt"));
           String linea;
           JComboBox<String> combo = new JComboBox<String>();
           while((linea = br.readLine()) != null) {
@@ -361,7 +410,11 @@ public class Ventana_matricula extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void bt_seleccionarcarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_seleccionarcarreraActionPerformed
-        // TODO add your handling code here:
+        try {
+            verificarInformacion();
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana_matricula.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bt_seleccionarcarreraActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -420,7 +473,7 @@ public class Ventana_matricula extends javax.swing.JFrame {
     private javax.swing.JPanel JPIngreso1;
     private javax.swing.JLabel Jlabel_calculadora1;
     private javax.swing.JTable Tabla_matricula;
-    private javax.swing.JTable Tabla_matricula1;
+    private javax.swing.JTable Tablamatricula1;
     private javax.swing.JButton bt_matricular;
     private javax.swing.JButton bt_seleccionarcarrera;
     public static javax.swing.JComboBox<String> combo_carreras;
