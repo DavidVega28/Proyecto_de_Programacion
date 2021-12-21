@@ -88,7 +88,7 @@ public class ventana_vercursosmatriculados extends javax.swing.JFrame {
                 jLabel23MouseClicked(evt);
             }
         });
-        jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, -1, 36));
+        jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, -1, 36));
 
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_Multiply_32px.png"))); // NOI18N
         jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -97,9 +97,9 @@ public class ventana_vercursosmatriculados extends javax.swing.JFrame {
                 jLabel24MouseClicked(evt);
             }
         });
-        jPanel6.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, -1, 36));
+        jPanel6.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 0, -1, 36));
 
-        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 760, 40));
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 830, 40));
 
         JPIngreso1.setBackground(new java.awt.Color(255, 255, 255));
         JPIngreso1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -184,7 +184,7 @@ public class ventana_vercursosmatriculados extends javax.swing.JFrame {
         });
         JPIngreso1.add(label_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 170, 20));
 
-        jPanel5.add(JPIngreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 590));
+        jPanel5.add(JPIngreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 580));
 
         jButton1.setBackground(new java.awt.Color(44, 47, 112));
         jButton1.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
@@ -195,12 +195,12 @@ public class ventana_vercursosmatriculados extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 50, 100, -1));
+        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 50, 100, -1));
 
         label_vercursos.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         label_vercursos.setForeground(new java.awt.Color(51, 51, 51));
         label_vercursos.setText("Cursos Matriculados");
-        jPanel5.add(label_vercursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 210, 30));
+        jPanel5.add(label_vercursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, 210, 30));
 
         jLabel12.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(51, 51, 51));
@@ -244,7 +244,7 @@ public class ventana_vercursosmatriculados extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 700, 240));
+        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 780, 240));
 
         jLabel16.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(51, 51, 51));
@@ -269,9 +269,9 @@ public class ventana_vercursosmatriculados extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 540, 130, -1));
+        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 540, 150, -1));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 580));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

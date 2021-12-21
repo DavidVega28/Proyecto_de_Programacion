@@ -19,11 +19,12 @@ public class seguridad {
             if((usuarios[i].equalsIgnoreCase(user)&& usuarios[i+1].equals(pass))){
                res = "Bienvenido " + user;         
                encontrado = true;
+                Bienvenida m1 = new Bienvenida();  
+                m1.setVisible(true);
+                new Registro_final().dispose();
                 JOptionPane.showMessageDialog(null, res,"Inicio de sesión",JOptionPane.INFORMATION_MESSAGE);
                 intentos = 0;
                 login.setIntentos(intentos); 
-                Bienvenida m1 = new Bienvenida();
-                m1.setVisible(true);
                 break;
             }
         }//FIN DEL FOR

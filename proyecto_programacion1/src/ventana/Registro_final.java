@@ -68,7 +68,7 @@ public class Registro_final extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         JPIngreso = new javax.swing.JPanel();
@@ -233,6 +233,7 @@ public class Registro_final extends javax.swing.JFrame {
         JPIngreso.add(bt_ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 110, 40));
 
         rb_admin.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rb_admin);
         rb_admin.setForeground(new java.awt.Color(51, 51, 51));
         rb_admin.setText("Administrador");
         rb_admin.addActionListener(new java.awt.event.ActionListener() {
@@ -243,6 +244,7 @@ public class Registro_final extends javax.swing.JFrame {
         JPIngreso.add(rb_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
 
         rb_estu.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rb_estu);
         rb_estu.setForeground(new java.awt.Color(51, 51, 51));
         rb_estu.setText("Estudiante");
         JPIngreso.add(rb_estu, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, -1, 20));
@@ -671,7 +673,7 @@ public class Registro_final extends javax.swing.JFrame {
                 datos[posicion][4] = st.nextToken().trim();
                 datos[posicion][5] = st.nextToken().trim();
                 datos[posicion][6] = st.nextToken().trim();
-
+ 
             }
             leerArchivo.close();
         }
@@ -750,11 +752,11 @@ public class Registro_final extends javax.swing.JFrame {
             String[] usuarios = null;
             String linea;
             try {
-                sc = new Scanner(new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt"));
+                sc = new Scanner(new File("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt"));
             } catch (FileNotFoundException ex) {
                 java.util.logging.Logger.getLogger(Registro_final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-            File f = new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt");
+            File f = new File("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Contrayusuario.txt");
             fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
             try {
@@ -785,7 +787,6 @@ public class Registro_final extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             java.util.logging.Logger.getLogger(Registro_final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        this.dispose();
 
     }//GEN-LAST:event_bt_ingresarActionPerformed
 
@@ -919,7 +920,7 @@ public class Registro_final extends javax.swing.JFrame {
             } else if (RBestudiante_registro.isSelected()) {
                 rol = "Estudiante";
             }
-            Usuario m = new Usuario(txt_nombre.getText(), txt_apelli.getText(), txt_numcedula.getText(), txt_usuario.getText(), txt_contra.getText(), txt_celular.getText(), txt_email.getText(), rol);
+            Usuario m = new Usuario(txt_nombre.getText(), txt_apelli.getText(), txt_numcedula.getText(), txt_usuario.getText(), txt_contra.getText(), txt_celular.getText(), txt_email.getText(), rol, codigo_Est);
             System.out.println(rol);
             enviar_Correo m1 = new enviar_Correo(txt_email.getText());
             m1.enviarcorreo();
@@ -963,8 +964,7 @@ public class Registro_final extends javax.swing.JFrame {
             pos = (int) (codi.nextDouble() + abc.length() - 1 + 0);
             codigoEst = codigoEst + abc.charAt(pos);
 
-            System.out.println("Codigo de estudiante" + " : " + codigoEst + "\n");
-            codigoEst = "";
+            System.out.println("Codigo de estudiante" + " : " + codigoEst + "\n"); 
             m++;
             
             codigo_Est = codigoEst;
@@ -1002,7 +1002,7 @@ public class Registro_final extends javax.swing.JFrame {
     private javax.swing.JButton bt_ingresar;
     private javax.swing.JButton bt_registrar;
     private javax.swing.JButton btn_Registrarse;
-    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPasswordField contraseña;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
@@ -1046,8 +1046,8 @@ public class Registro_final extends javax.swing.JFrame {
     private javax.swing.JLabel lb_ver1;
     private javax.swing.JPanel panel_login;
     private javax.swing.JPanel panel_registro;
-    private javax.swing.JRadioButton rb_admin;
-    private javax.swing.JRadioButton rb_estu;
+    public static javax.swing.JRadioButton rb_admin;
+    public static javax.swing.JRadioButton rb_estu;
     private javax.swing.JTextField txt_apelli;
     private javax.swing.JTextField txt_celular;
     private javax.swing.JTextField txt_contra;

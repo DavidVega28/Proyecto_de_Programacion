@@ -3,10 +3,9 @@ package clases;
 
 
 public class Usuario {
-    private String nombre,apellidos,numcedula,usuario,contra,celular,email,rol;
-    
+    private String nombre,apellidos,numcedula,usuario,contra,celular,email,rol,codigo;
 
-    public Usuario(String nombre, String apellidos, String numcedula, String usuario, String contra, String celular, String email, String rol) {
+    public Usuario(String nombre, String apellidos, String numcedula, String usuario, String contra, String celular, String email, String rol, String codigo) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.numcedula = numcedula;
@@ -15,7 +14,7 @@ public class Usuario {
         this.celular = celular;
         this.email = email;
         this.rol = rol;
-
+        this.codigo = codigo;
     }
 
     public Usuario(String código, String cupos) {
@@ -25,6 +24,7 @@ public class Usuario {
     public Usuario(String rol) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
     public String getNombre() {
         return nombre;
@@ -88,6 +88,14 @@ public class Usuario {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
     
     

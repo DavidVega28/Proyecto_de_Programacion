@@ -43,6 +43,7 @@ public class Añadir_carreras extends javax.swing.JFrame {
         t.setRowCount(0);
         for (int i = 0; i < arraylist_carreras.Arraycarrera.size(); i++) {
             t.addRow(new Object[]{
+             
                 arraylist_carreras.Arraycarrera.get(i).getNombre_carrera(),
                 arraylist_carreras.Arraycarrera.get(i).getCodigo(),
                 arraylist_carreras.Arraycarrera.get(i).getCupos(),});
@@ -99,7 +100,7 @@ public class Añadir_carreras extends javax.swing.JFrame {
     private void guardarregistro() throws FileNotFoundException, UnsupportedEncodingException, IOException{
     
         BufferedWriter escribirArchivo = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivocarreras,true),"utf-8"));
-        escribirArchivo.write(txt_nombrecarrera.getText()+","+txt_codigo.getText()+","+txt_cupos.getText()+"\n");
+        escribirArchivo.write(txt_codigo.getText()+","+txt_nombrecarrera.getText()+","+txt_cupos.getText()+"\n");
         verificarInformacion();
         escribirArchivo.close();
     }

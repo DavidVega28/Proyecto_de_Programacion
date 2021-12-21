@@ -86,7 +86,7 @@ public class Editar_info extends javax.swing.JFrame {
                 jLabel23MouseClicked(evt);
             }
         });
-        jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, -1, 36));
+        jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 0, -1, 36));
 
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_Multiply_32px.png"))); // NOI18N
         jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -95,9 +95,9 @@ public class Editar_info extends javax.swing.JFrame {
                 jLabel24MouseClicked(evt);
             }
         });
-        jPanel6.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, -1, 36));
+        jPanel6.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 0, -1, 36));
 
-        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 760, 40));
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 860, 40));
 
         JPIngreso1.setBackground(new java.awt.Color(255, 255, 255));
         JPIngreso1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -182,7 +182,7 @@ public class Editar_info extends javax.swing.JFrame {
         jLabel3.setText("Información Personal");
         JPIngreso1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 170, 30));
 
-        jPanel5.add(JPIngreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 590));
+        jPanel5.add(JPIngreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 600));
 
         jButton1.setBackground(new java.awt.Color(44, 47, 112));
         jButton1.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
@@ -193,7 +193,7 @@ public class Editar_info extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 50, 100, -1));
+        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 50, 100, -1));
 
         jLabel11.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
@@ -207,7 +207,7 @@ public class Editar_info extends javax.swing.JFrame {
                 txt_email_cambiarActionPerformed(evt);
             }
         });
-        jPanel5.add(txt_email_cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 310, 40));
+        jPanel5.add(txt_email_cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 400, 40));
 
         jLabel14.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(51, 51, 51));
@@ -221,7 +221,7 @@ public class Editar_info extends javax.swing.JFrame {
                 txt_nombre_cambiarActionPerformed(evt);
             }
         });
-        jPanel5.add(txt_nombre_cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 310, 40));
+        jPanel5.add(txt_nombre_cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 400, 40));
 
         jLabel15.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(51, 51, 51));
@@ -235,7 +235,7 @@ public class Editar_info extends javax.swing.JFrame {
                 txt_apellido_cambiarActionPerformed(evt);
             }
         });
-        jPanel5.add(txt_apellido_cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 310, 40));
+        jPanel5.add(txt_apellido_cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 400, 40));
 
         jLabel16.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(51, 51, 51));
@@ -249,39 +249,33 @@ public class Editar_info extends javax.swing.JFrame {
                 txt_cedula_cambiarActionPerformed(evt);
             }
         });
-        jPanel5.add(txt_cedula_cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 310, 40));
+        jPanel5.add(txt_cedula_cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 400, 40));
 
         BtnEditar1.setBackground(new java.awt.Color(44, 47, 112));
         BtnEditar1.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         BtnEditar1.setForeground(new java.awt.Color(255, 255, 255));
         BtnEditar1.setText("Editar Información");
         BtnEditar1.setBorder(null);
-        jPanel5.add(BtnEditar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 510, 190, 40));
+        jPanel5.add(BtnEditar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 190, 40));
 
         lb_infopersonal.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         lb_infopersonal.setForeground(new java.awt.Color(51, 51, 51));
         lb_infopersonal.setText("Información Personal");
-        jPanel5.add(lb_infopersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 220, 30));
+        jPanel5.add(lb_infopersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 50, 220, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
+            .addGap(0, 1150, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 602, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE))
         );
 
         pack();

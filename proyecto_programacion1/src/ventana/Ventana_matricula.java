@@ -1,52 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ventana;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Usuario
- */
+
 public class Ventana_matricula extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Ventana_matricula
-     */
+
     public Ventana_matricula() {
         initComponents();
         this.setLocationRelativeTo(null);
-        cmb_list();
+        llenar_combo();
     }
 
-    public static void cmb_list(){
-        String dire = "/.Carreras";
-        
-        File listfile = new File(dire);
-        FilenameFilter filter = new FilenameFilter(){
-            @Override
-
-            public boolean accept(File file, String string) {
-                return !string.endsWith(".rar");
-            }
-        };
-                
-                
-        String [] file = listfile.list(filter);  
-       //combo_carreras.addItem(file);
-       //combo_carreras.setModel(new DefaultComboBoxModel<>(file));
-       
-    }
+ 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -77,11 +55,12 @@ public class Ventana_matricula extends javax.swing.JFrame {
         combo_carreras = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla_matricula = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        bt_seleccionarcarrera = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla_matricula1 = new javax.swing.JTable();
+        bt_matricular = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -104,7 +83,7 @@ public class Ventana_matricula extends javax.swing.JFrame {
                 jLabel23MouseClicked(evt);
             }
         });
-        jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, -1, 36));
+        jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 0, -1, 36));
 
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_Multiply_32px.png"))); // NOI18N
         jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -113,9 +92,9 @@ public class Ventana_matricula extends javax.swing.JFrame {
                 jLabel24MouseClicked(evt);
             }
         });
-        jPanel6.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, -1, 36));
+        jPanel6.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 0, -1, 36));
 
-        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 760, 40));
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 860, 40));
 
         JPIngreso1.setBackground(new java.awt.Color(255, 255, 255));
         JPIngreso1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -200,7 +179,7 @@ public class Ventana_matricula extends javax.swing.JFrame {
         jLabel3.setText("Información Personal");
         JPIngreso1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 170, 30));
 
-        jPanel5.add(JPIngreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 590));
+        jPanel5.add(JPIngreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 600));
 
         jButton1.setBackground(new java.awt.Color(44, 47, 112));
         jButton1.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
@@ -216,12 +195,12 @@ public class Ventana_matricula extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 50, 100, -1));
+        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 50, 100, -1));
 
         jLabel2.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Matricula");
-        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 50, -1, 30));
+        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 50, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
@@ -229,7 +208,6 @@ public class Ventana_matricula extends javax.swing.JFrame {
         jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 190, 30));
 
         combo_carreras.setBackground(new java.awt.Color(204, 204, 204));
-        combo_carreras.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel5.add(combo_carreras, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 290, 30));
 
         Tabla_matricula.setModel(new javax.swing.table.DefaultTableModel(
@@ -245,23 +223,23 @@ public class Ventana_matricula extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Tabla_matricula);
 
-        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 420, 660, 140));
+        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 420, 790, 140));
 
-        jButton2.setBackground(new java.awt.Color(44, 47, 112));
-        jButton2.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Matricular ");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_seleccionarcarrera.setBackground(new java.awt.Color(44, 47, 112));
+        bt_seleccionarcarrera.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        bt_seleccionarcarrera.setForeground(new java.awt.Color(255, 255, 255));
+        bt_seleccionarcarrera.setText("Seleccionar");
+        bt_seleccionarcarrera.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                bt_seleccionarcarreraMouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bt_seleccionarcarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bt_seleccionarcarreraActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 370, 140, -1));
+        jPanel5.add(bt_seleccionarcarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 140, -1));
 
         jLabel5.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
@@ -285,32 +263,59 @@ public class Ventana_matricula extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(Tabla_matricula1);
 
-        jPanel5.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 660, 140));
+        jPanel5.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 780, 140));
+
+        bt_matricular.setBackground(new java.awt.Color(44, 47, 112));
+        bt_matricular.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        bt_matricular.setForeground(new java.awt.Color(255, 255, 255));
+        bt_matricular.setText("Matricular ");
+        bt_matricular.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_matricularMouseClicked(evt);
+            }
+        });
+        bt_matricular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_matricularActionPerformed(evt);
+            }
+        });
+        jPanel5.add(bt_matricular, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 370, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
+            .addGap(0, 1151, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1151, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 602, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void llenar_combo (){
 
+          try {
+          BufferedReader br=new BufferedReader(new FileReader("C:\\Users\\Luis Miguel\\OneDrive\\Documentos\\NetBeansProjects\\proyecto_de_programacion\\Proyecto_de_Programacion\\proyecto_programacion1\\Carreras.txt"));
+          String linea;
+          JComboBox<String> combo = new JComboBox<String>();
+          while((linea = br.readLine()) != null) {
+            StringTokenizer tokens = new StringTokenizer(linea,",");
+            System.out.println(tokens.nextElement());
+            combo_carreras.addItem(tokens.nextToken());
+            
+          }
+          br.close();
+        } catch(Exception x) {
+          x.printStackTrace();
+        }
+    
+    }
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
         this.setState(Ventana_matricula.ICONIFIED);
     }//GEN-LAST:event_jLabel23MouseClicked
@@ -355,17 +360,25 @@ public class Ventana_matricula extends javax.swing.JFrame {
     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bt_seleccionarcarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_seleccionarcarreraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bt_seleccionarcarreraActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void bt_seleccionarcarreraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_seleccionarcarreraMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_bt_seleccionarcarreraMouseClicked
+
+    private void bt_matricularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_matricularMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_matricularMouseClicked
+
+    private void bt_matricularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_matricularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_matricularActionPerformed
 
     /**
      * @param args the command line arguments
@@ -408,9 +421,10 @@ public class Ventana_matricula extends javax.swing.JFrame {
     private javax.swing.JLabel Jlabel_calculadora1;
     private javax.swing.JTable Tabla_matricula;
     private javax.swing.JTable Tabla_matricula1;
+    private javax.swing.JButton bt_matricular;
+    private javax.swing.JButton bt_seleccionarcarrera;
     public static javax.swing.JComboBox<String> combo_carreras;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;

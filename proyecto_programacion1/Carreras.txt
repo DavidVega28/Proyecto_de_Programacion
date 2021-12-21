@@ -1,3 +1,4 @@
-Administración,AD123,2
-Ingenieria en sistemas,IN345,3
-Farmacia,FA123,2
+AD234,Administración,2
+IN445,Ingenieria en Sistemas,3
+FA654,Farmacia,2
+DE656,Derecho,2
