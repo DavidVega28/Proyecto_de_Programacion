@@ -29,7 +29,8 @@ import javax.swing.table.DefaultTableModel;
 import static ventana.Ventana_matricula.combo_carreras;
 
 public class Ver_cursos extends javax.swing.JFrame {
-
+    File archivofarma = new File("Cursos_farmacia.txt");
+    File archivoInge= new File("Cursos_IngenieriaenSistemas.txt");
     File archivocursos = new File("Cursos_Administración.txt");
     String opcion = "Nuevo";
 
@@ -38,7 +39,7 @@ public class Ver_cursos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         llenar_combo();
-
+       
     }
 
     @SuppressWarnings("unchecked")
@@ -53,25 +54,12 @@ public class Ver_cursos extends javax.swing.JFrame {
         Herramientas1 = new javax.swing.JLabel();
         jlblInternet1 = new javax.swing.JLabel();
         Jlabel_calculadora1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        lb_codigo1 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        lb_apelli1 = new javax.swing.JLabel();
-        lb_apellidos1 = new javax.swing.JLabel();
-        lb_cedula1 = new javax.swing.JLabel();
-        label_estudiante1 = new javax.swing.JLabel();
-        lb_email1 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        label_nombre1 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         lb_selecionar = new javax.swing.JLabel();
         label_vercursos = new javax.swing.JLabel();
         combo_vercarreras = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        bt_seleccionarcarrera = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -137,59 +125,6 @@ public class Ver_cursos extends javax.swing.JFrame {
         });
         JPIngreso1.add(Jlabel_calculadora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 90, 40, 30));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_User_96px_2.png"))); // NOI18N
-        JPIngreso1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 140, 80));
-
-        lb_codigo1.setForeground(new java.awt.Color(153, 153, 153));
-        JPIngreso1.add(lb_codigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 170, 20));
-
-        jLabel8.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel8.setText("Número Cédula:");
-        JPIngreso1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
-
-        lb_apelli1.setForeground(new java.awt.Color(153, 153, 153));
-        JPIngreso1.add(lb_apelli1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 170, 20));
-
-        lb_apellidos1.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        lb_apellidos1.setForeground(new java.awt.Color(51, 51, 51));
-        lb_apellidos1.setText("Apellidos:");
-        JPIngreso1.add(lb_apellidos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
-
-        lb_cedula1.setForeground(new java.awt.Color(153, 153, 153));
-        JPIngreso1.add(lb_cedula1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 170, 20));
-
-        label_estudiante1.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        label_estudiante1.setForeground(new java.awt.Color(51, 51, 51));
-        label_estudiante1.setText("Código Estudiantil:");
-        JPIngreso1.add(label_estudiante1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, -1));
-
-        lb_email1.setForeground(new java.awt.Color(153, 153, 153));
-        JPIngreso1.add(lb_email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 170, 20));
-
-        jLabel13.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel13.setText("E-mail:");
-        JPIngreso1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
-
-        label_nombre1.setForeground(new java.awt.Color(153, 153, 153));
-        label_nombre1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                label_nombre1KeyReleased(evt);
-            }
-        });
-        JPIngreso1.add(label_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 170, 20));
-
-        jLabel12.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel12.setText("Nombre:");
-        JPIngreso1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Información Personal");
-        JPIngreso1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 170, 30));
-
         jPanel5.add(JPIngreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 600));
 
         jButton1.setBackground(new java.awt.Color(44, 47, 112));
@@ -220,6 +155,11 @@ public class Ver_cursos extends javax.swing.JFrame {
                 combo_vercarrerasItemStateChanged(evt);
             }
         });
+        combo_vercarreras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_vercarrerasActionPerformed(evt);
+            }
+        });
         jPanel5.add(combo_vercarreras, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 280, 30));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -233,22 +173,6 @@ public class Ver_cursos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla);
 
         jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, 780, 350));
-
-        bt_seleccionarcarrera.setBackground(new java.awt.Color(44, 47, 112));
-        bt_seleccionarcarrera.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        bt_seleccionarcarrera.setForeground(new java.awt.Color(255, 255, 255));
-        bt_seleccionarcarrera.setText("Seleccionar");
-        bt_seleccionarcarrera.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bt_seleccionarcarreraMouseClicked(evt);
-            }
-        });
-        bt_seleccionarcarrera.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_seleccionarcarreraActionPerformed(evt);
-            }
-        });
-        jPanel5.add(bt_seleccionarcarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -269,7 +193,87 @@ public class Ver_cursos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void verificarInformacion() throws FileNotFoundException, IOException {
+private void verificarInformacion_farma() throws FileNotFoundException, IOException {
+        String linea = null;
+        int numeroRegistros = 0;
+
+        BufferedReader leer = new BufferedReader(new FileReader(archivofarma));
+        while ((linea = leer.readLine()) != null) {
+            numeroRegistros += 1;
+        }
+        leer.close();
+        if (numeroRegistros == 0) {
+            JOptionPane.showMessageDialog(rootPane, "El archivo esta vacio");
+        } else {
+            String[][] datos = new String[numeroRegistros][3];
+            int posicion = 0;
+            String linealeida = null;
+            BufferedReader leerarchivo = new BufferedReader(new FileReader(archivofarma));
+            while ((linealeida = leerarchivo.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linealeida, ",");
+
+                datos[posicion][0] = st.nextToken().trim();
+                datos[posicion][1] = st.nextToken().trim();
+                datos[posicion][2] = st.nextToken().trim();
+
+                posicion += 1;
+            }
+
+            leerarchivo.close();
+            DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+            limpliartabla(modelo);
+            for (int i = 0; i < datos.length; i++) {
+
+                String[] data = new String[3];
+                for (int j = 0; j < datos[i].length; j++) {
+                    data[(j)] = datos[i][j];
+                }
+                modelo.addRow(data);
+            }
+
+        }
+    }    
+private void verificarInformacion_ingenieria() throws FileNotFoundException, IOException {
+        String linea = null;
+        int numeroRegistros = 0;
+
+        BufferedReader leer = new BufferedReader(new FileReader(archivoInge));
+        while ((linea = leer.readLine()) != null) {
+            numeroRegistros += 1;
+        }
+        leer.close();
+        if (numeroRegistros == 0) {
+            JOptionPane.showMessageDialog(rootPane, "El archivo esta vacio");
+        } else {
+            String[][] datos = new String[numeroRegistros][3];
+            int posicion = 0;
+            String linealeida = null;
+            BufferedReader leerarchivo = new BufferedReader(new FileReader(archivoInge));
+            while ((linealeida = leerarchivo.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linealeida, ",");
+
+                datos[posicion][0] = st.nextToken().trim();
+                datos[posicion][1] = st.nextToken().trim();
+                datos[posicion][2] = st.nextToken().trim();
+
+                posicion += 1;
+            }
+
+            leerarchivo.close();
+            DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+            limpliartabla(modelo);
+            for (int i = 0; i < datos.length; i++) {
+
+                String[] data = new String[3];
+                for (int j = 0; j < datos[i].length; j++) {
+                    data[(j)] = datos[i][j];
+                }
+                modelo.addRow(data);
+            }
+
+        }
+    }
+private void verificarInformacion() throws FileNotFoundException, IOException {
         String linea = null;
         int numeroRegistros = 0;
 
@@ -344,22 +348,6 @@ public class Ver_cursos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel24MouseClicked
 
-    private void Herramientas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Herramientas1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Herramientas1MouseClicked
-
-    private void jlblInternet1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblInternet1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jlblInternet1MouseClicked
-
-    private void Jlabel_calculadora1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Jlabel_calculadora1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Jlabel_calculadora1MouseClicked
-
-    private void label_nombre1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_label_nombre1KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_label_nombre1KeyReleased
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Bienvenida m = null;
         try {
@@ -376,20 +364,46 @@ public class Ver_cursos extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void combo_vercarrerasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_vercarrerasItemStateChanged
-
+        
     }//GEN-LAST:event_combo_vercarrerasItemStateChanged
 
-    private void bt_seleccionarcarreraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_seleccionarcarreraMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bt_seleccionarcarreraMouseClicked
-
-    private void bt_seleccionarcarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_seleccionarcarreraActionPerformed
-        try {
-            verificarInformacion();
-        } catch (IOException ex) {
-            Logger.getLogger(Ver_cursos.class.getName()).log(Level.SEVERE, null, ex);
+    private void combo_vercarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_vercarrerasActionPerformed
+        String opcion = (String)combo_vercarreras.getSelectedItem();
+        
+        if(opcion.equals("Administración")){
+            try {
+                verificarInformacion();
+            } catch (IOException ex) {
+                Logger.getLogger(Ver_cursos.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-    }//GEN-LAST:event_bt_seleccionarcarreraActionPerformed
+        if(opcion.equals("Ingenieria en sistemas")){
+            try {
+                verificarInformacion_ingenieria();
+            } catch (IOException ex) {
+                Logger.getLogger(Ver_cursos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }    
+        if(opcion.equals("Farmacia")){
+            try {
+                verificarInformacion_farma();
+            } catch (IOException ex) {
+                Logger.getLogger(Ver_cursos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_combo_vercarrerasActionPerformed
+
+    private void Jlabel_calculadora1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Jlabel_calculadora1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Jlabel_calculadora1MouseClicked
+
+    private void jlblInternet1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblInternet1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jlblInternet1MouseClicked
+
+    private void Herramientas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Herramientas1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Herramientas1MouseClicked
 
     public static void main(String args[]) {
 
@@ -404,28 +418,15 @@ public class Ver_cursos extends javax.swing.JFrame {
     private javax.swing.JLabel Herramientas1;
     private javax.swing.JPanel JPIngreso1;
     private javax.swing.JLabel Jlabel_calculadora1;
-    private javax.swing.JButton bt_seleccionarcarrera;
     public javax.swing.JComboBox<String> combo_vercarreras;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlblInternet1;
-    private javax.swing.JLabel label_estudiante1;
-    private javax.swing.JLabel label_nombre1;
     private javax.swing.JLabel label_vercursos;
-    private javax.swing.JLabel lb_apelli1;
-    private javax.swing.JLabel lb_apellidos1;
-    private javax.swing.JLabel lb_cedula1;
-    private javax.swing.JLabel lb_codigo1;
-    private javax.swing.JLabel lb_email1;
     private javax.swing.JLabel lb_selecionar;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables

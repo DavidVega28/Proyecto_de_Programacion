@@ -32,12 +32,6 @@ public class Registro_final extends javax.swing.JFrame {
     private static int intentos;
     private static String user, pass;
 
-    public static String texto_nombre = "";
-    public static String texto_apellidos = "";
-    public static String texto_numcedula = "";
-    public static String texto_email = "";
-    public static String codigo_Est = "";
-
     File archivoIniciosesion = new File("Contrayusuario.txt");
     File archivoregistro = new File("Registro.txt");
     String opcion = "Nuevo";
@@ -667,7 +661,7 @@ public class Registro_final extends javax.swing.JFrame {
 
             while ((linealeida = leerArchivo.readLine()) != null) {
 
-                StringTokenizer st = new StringTokenizer(linealeida, "\n");
+                StringTokenizer st = new StringTokenizer(linealeida, ",");
 
                 datos[posicion][0] = st.nextToken().trim();
                 datos[posicion][1] = st.nextToken().trim();
@@ -957,7 +951,7 @@ public class Registro_final extends javax.swing.JFrame {
             }
             
                 
-            Usuario m = new Usuario(txt_nombre.getText(), txt_apelli.getText(), txt_numcedula.getText(), txt_usuario.getText(), txt_contra.getText(), txt_celular.getText(), txt_email.getText(), rol, codigo_Est);
+            Usuario m = new Usuario(txt_nombre.getText(), txt_apelli.getText(), txt_numcedula.getText(), txt_usuario.getText(), txt_contra.getText(), txt_celular.getText(), txt_email.getText(), rol);
             System.out.println(rol);
             enviar_Correo m1 = new enviar_Correo(txt_email.getText());
             m1.enviarcorreo();
@@ -981,30 +975,6 @@ public class Registro_final extends javax.swing.JFrame {
             Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Registro_final.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        texto_nombre = txt_nombre.getText();
-        texto_apellidos = txt_apelli.getText();
-        texto_numcedula = txt_numcedula.getText();
-        texto_email = txt_email.getText();
-
-        Random codi = new Random();
-
-        String abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String codigoEst = "";
-        int m = 0, pos = 0, num;
-
-        while (m < 1) {
-            pos = (int) (codi.nextDouble() * abc.length() - 1 + 0);
-            num = (int) (codi.nextDouble() * 9999 + 1000);
-            codigoEst = codigoEst + abc.charAt(pos) + num;
-            pos = (int) (codi.nextDouble() + abc.length() - 1 + 0);
-            codigoEst = codigoEst + abc.charAt(pos);
-
-            System.out.println("Codigo de estudiante" + " : " + codigoEst + "\n");
-            m++;
-
-            codigo_Est = codigoEst;
         }
 
         txt_nombre.setText("");

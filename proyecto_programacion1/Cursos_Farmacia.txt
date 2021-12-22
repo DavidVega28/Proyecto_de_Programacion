@@ -1,0 +1,2 @@
+Laboratorio I,LAP32,3
+Química Básica,QB234,2
